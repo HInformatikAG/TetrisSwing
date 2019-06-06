@@ -201,12 +201,12 @@ public class Spiel implements Runnable {
     }
 
     private void erhoehePunkte() {
-    
+
         if (isBeschleunigterFall())
             punkte += level * 3 + 21;
         else
             punkte += level * 3 + 3;
-    
+
         pruefeUndSetzeLevel();
     }
 
@@ -219,11 +219,11 @@ public class Spiel implements Runnable {
     }
 
     private TetrominoSpielstein neuerZufaelligerSpielstein() {
-    
+
         TetrominoSpielstein tetromino = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
-    
+
         naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
-    
+
         return tetromino;
     }
 
@@ -279,6 +279,8 @@ public class Spiel implements Runnable {
             bloeckeProReihe.put(block.getY(), blockListe);
         }
 
+        // TODO hier wird implizit angenommen, das die blockListe aus
+        // ViertelBloecken besteht, dass muss noch besser gekapselt werden
         for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
 
             List<TetrominoSpielstein> blockListe = reihe.getValue();
@@ -342,19 +344,19 @@ public class Spiel implements Runnable {
     }
 
     private void beendeSpiel() {
-    
+
         spielLaeuft = false;
-    
+
         try {
-    
+
             if (TetrisKonstanten.MUSIK_AN)
                 soundThread.join();
-    
+
         } catch (InterruptedException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             Thread.currentThread().interrupt();
         }
-    
+
         highscoreSpeichern();
     }
 }

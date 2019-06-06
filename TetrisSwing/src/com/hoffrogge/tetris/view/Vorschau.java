@@ -88,6 +88,7 @@ public class Vorschau extends Canvas {
             for (TetrominoSpielstein block : naechsterSpielstein.getViertelBloecke())
                 block.setFuellFarbe(FUELL_FARBE);
 
+            // TODO: Vorschau zeichnet Blöcke zu oft
             naechsterSpielstein.zeichnen(g);
 
         } finally {
