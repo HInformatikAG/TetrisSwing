@@ -12,9 +12,6 @@ public class TetrominoBlock extends Tetromino {
 
     public TetrominoBlock(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
         durchmesser = TetrisKonstanten.BLOCK_BREITE * 2;
         kantenLaengeViertelBlock = durchmesser / 2;
 

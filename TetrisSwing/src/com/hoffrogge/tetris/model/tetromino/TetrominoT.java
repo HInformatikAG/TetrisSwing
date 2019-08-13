@@ -10,9 +10,6 @@ public class TetrominoT extends Tetromino {
 
     public TetrominoT(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
         durchmesser = TetrisKonstanten.BLOCK_BREITE * 3;
 
         viertelBloecke.add(new ViertelBlock(x, y));

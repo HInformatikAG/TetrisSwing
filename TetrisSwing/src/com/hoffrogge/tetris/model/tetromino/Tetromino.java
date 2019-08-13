@@ -13,8 +13,6 @@ public abstract class Tetromino implements TetrominoSpielstein {
     private Farbe                       linienFarbe;
 
     protected int                       durchmesser;
-    protected int                       x;
-    protected int                       y;
 
     protected List<TetrominoSpielstein> viertelBloecke = new ArrayList<>(4);
 
@@ -22,33 +20,32 @@ public abstract class Tetromino implements TetrominoSpielstein {
 
     @Override
     public void setMittelpunkt(Punkt mittelpunkt) {
-        x = mittelpunkt.getX();
-        y = mittelpunkt.getY();
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override
     public Punkt getMittelPunkt() {
-        return new Punkt(x, y);
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override
     public int getX() {
-        return x;
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override
     public void setX(int x) {
-        this.x = x;
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override
     public int getY() {
-        return y;
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override
     public void setY(int y) {
-        this.y = y;
+        throw new UnsupportedOperationException("Tetromino unterstuetzt diese Methode nicht! Nutze Teilblock!");
     }
 
     @Override

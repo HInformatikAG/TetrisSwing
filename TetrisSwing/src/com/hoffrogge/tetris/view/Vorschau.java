@@ -83,13 +83,19 @@ public class Vorschau extends Canvas {
                     throw new IllegalStateException("TetrominoTyp " + naechsterSpielsteinTyp + " ist nicht bekannt!");
             }
 
-            TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp, xKoordinate, yKoordinate);
+            TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
 
-            for (TetrominoSpielstein block : naechsterSpielstein.getViertelBloecke())
+            for (TetrominoSpielstein block : naechsterSpielstein.getViertelBloecke()) {
+
+//                naechsterSpielstein.setX(xKoordinate);
+//                naechsterSpielstein.setY(yKoordinate);
+
                 block.setFuellFarbe(FUELL_FARBE);
+            }
 
             // TODO: Vorschau zeichnet Blöcke zu oft
             naechsterSpielstein.zeichnen(g);
+            System.out.println(naechsterSpielstein + " gezeichnet");
 
         } finally {
             if (g != null)
