@@ -28,9 +28,10 @@ public class Vorschau extends Canvas {
 
     public void aktualisieren(TetrominoTyp tetrominoTyp) {
         this.naechsterSpielsteinTyp = tetrominoTyp;
+        zeichnen();
     }
 
-    public void zeichnen() {
+    private void zeichnen() {
 
         Graphics g = null;
 
@@ -83,15 +84,10 @@ public class Vorschau extends Canvas {
                     throw new IllegalStateException("TetrominoTyp " + naechsterSpielsteinTyp + " ist nicht bekannt!");
             }
 
-            TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
+            TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp, xKoordinate, yKoordinate);
 
-            for (TetrominoSpielstein block : naechsterSpielstein.getViertelBloecke()) {
-
-//                naechsterSpielstein.setX(xKoordinate);
-//                naechsterSpielstein.setY(yKoordinate);
-
-                block.setFuellFarbe(FUELL_FARBE);
-            }
+            for (TetrominoSpielstein teilblock : naechsterSpielstein.getViertelBloecke())
+                teilblock.setFuellFarbe(FUELL_FARBE);
 
             // TODO: Vorschau zeichnet Blöcke zu oft
             naechsterSpielstein.zeichnen(g);

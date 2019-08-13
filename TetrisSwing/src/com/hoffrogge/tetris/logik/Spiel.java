@@ -57,17 +57,16 @@ public class Spiel implements Runnable {
         this.spielfenster = spielfenster;
 
         this.naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
-        this.fallenderSpielstein = neuerZufaelligerSpielstein();
         this.gefalleneSteine = new CopyOnWriteArrayList<>();
 
         this.spielfeld.setSpiel(this);
-
         this.spielLaeuft = true;
     }
 
     public void starteSpiel() {
 
         highscoreLaden();
+        bestimmeNaechstenFallendenSpielstein();
 
         spielThread = new Thread(this);
         spielThread.start();
@@ -93,7 +92,6 @@ public class Spiel implements Runnable {
             }
 
             spielfeld.zeichnen();
-            vorschau.zeichnen();
 
             if (istSpielfeldVoll()) {
 
