@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.hoffrogge.tetris.model.Farbe;
-import com.hoffrogge.tetris.model.Punkt;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class ViertelBlock implements TetrominoSpielstein {
@@ -29,29 +28,8 @@ public class ViertelBlock implements TetrominoSpielstein {
     }
 
     @Override
-    public void setMittelpunkt(Punkt mittelpunkt) {
-        this.x = mittelpunkt.getX();
-        this.y = mittelpunkt.getY();
-    }
-
-    @Override
-    public Punkt getMittelPunkt() {
-        return new Punkt(x, y);
-    }
-
-    @Override
-    public void setDurchmesser(int d) {
-        this.kantenLaengeViertelBlock = d;
-    }
-
-    @Override
     public void setLinienFarbe(Farbe farbe) {
         this.linienFarbe = farbe;
-    }
-
-    @Override
-    public Farbe getLinienFarbe() {
-        return linienFarbe;
     }
 
     @Override
