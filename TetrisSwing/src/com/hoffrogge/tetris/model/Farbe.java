@@ -5,12 +5,12 @@ import java.awt.Color;
 public class Farbe {
 
     int rot;
-    int gelb;
+    int gruen;
     int blau;
 
     public Farbe(int rot, int gelb, int blau) {
         this.rot = rot;
-        this.gelb = gelb;
+        this.gruen = gelb;
         this.blau = blau;
     }
 
@@ -22,12 +22,12 @@ public class Farbe {
         this.rot = rot;
     }
 
-    public int getGelb() {
-        return gelb;
+    public int getGruen() {
+        return gruen;
     }
 
-    public void setGelb(int gelb) {
-        this.gelb = gelb;
+    public void setGruen(int gruen) {
+        this.gruen = gruen;
     }
 
     public int getBlau() {
@@ -39,6 +39,6 @@ public class Farbe {
     }
 
     public Color konvertiereZuColor() {
-        return new Color(rot, gelb, blau);
+        return new Color(rot, gruen, blau);
     }
 }
