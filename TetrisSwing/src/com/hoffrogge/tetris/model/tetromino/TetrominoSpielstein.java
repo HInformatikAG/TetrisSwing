@@ -1,9 +1,8 @@
 package com.hoffrogge.tetris.model.tetromino;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
-
-import com.hoffrogge.tetris.model.Farbe;
 
 /**
  * Definition eines Tetris-Spielsteins als TetrominoSpielstein. Dieses Interface
@@ -46,11 +45,11 @@ public interface TetrominoSpielstein extends Comparable<TetrominoSpielstein> {
      */
     List<TetrominoSpielstein> getViertelBloecke();
 
-    Farbe getFuellFarbe();
+    Color getFuellFarbe();
 
-    void setFuellFarbe(Farbe farbe);
+    void setFuellFarbe(Color farbe);
 
-    void setLinienFarbe(Farbe farbe);
+    void setLinienFarbe(Color farbe);
 
     void zeichnen(Graphics graphics);
 

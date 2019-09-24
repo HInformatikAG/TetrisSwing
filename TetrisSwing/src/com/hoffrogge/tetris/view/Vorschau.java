@@ -1,9 +1,9 @@
 package com.hoffrogge.tetris.view;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 
-import com.hoffrogge.tetris.model.Farbe;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
@@ -12,7 +12,7 @@ import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
 @SuppressWarnings("serial")
 public class Vorschau extends Canvas {
 
-    private static final Farbe FUELL_FARBE = new Farbe(200, 240, 255);
+    private static final Color FUELL_FARBE = new Color(200, 240, 255);
 
     private TetrominoTyp       naechsterSpielsteinTyp;
     private TetrominoFactory   tetrominoFactory;
@@ -21,8 +21,8 @@ public class Vorschau extends Canvas {
 
         this.tetrominoFactory = tetrominoFactory;
 
-        setBackground(TetrisKonstanten.HINTERGRUND.konvertiereZuColor());
-        setForeground(TetrisKonstanten.VORDERGRUND.konvertiereZuColor());
+        setBackground(TetrisKonstanten.HINTERGRUND);
+        setForeground(TetrisKonstanten.VORDERGRUND);
         setBounds(TetrisKonstanten.VORSCHAU_POS_X, TetrisKonstanten.VORSCHAU_POS_Y, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE);
     }
 
@@ -105,7 +105,7 @@ public class Vorschau extends Canvas {
     private void zeichneVorschauFeld(Graphics g) {
 
         /* Hintergrund des Feldes */
-        g.setColor(TetrisKonstanten.VORDERGRUND.konvertiereZuColor());
+        g.setColor(TetrisKonstanten.VORDERGRUND);
         g.fillRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE);
     }
 }

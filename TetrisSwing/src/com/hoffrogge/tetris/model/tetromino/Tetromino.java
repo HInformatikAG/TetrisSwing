@@ -1,16 +1,16 @@
 package com.hoffrogge.tetris.model.tetromino;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hoffrogge.tetris.model.Farbe;
 import com.hoffrogge.tetris.model.Punkt;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public abstract class Tetromino implements TetrominoSpielstein {
 
-    private Farbe                       linienFarbe;
+    private Color                       linienFarbe;
 
     protected int                       durchmesser;
 
@@ -37,12 +37,12 @@ public abstract class Tetromino implements TetrominoSpielstein {
     }
 
     @Override
-    public void setLinienFarbe(Farbe farbe) {
+    public void setLinienFarbe(Color farbe) {
         linienFarbe = farbe;
     }
 
     @Override
-    public Farbe getFuellFarbe() {
+    public Color getFuellFarbe() {
 
         if (viertelBloecke.isEmpty())
             throw new IllegalStateException("Der Tetromino wurde aufgeteilt, es kann keine Fuellfarbe mehr bestimmt werden!");
@@ -51,7 +51,7 @@ public abstract class Tetromino implements TetrominoSpielstein {
     }
 
     @Override
-    public void setFuellFarbe(Farbe farbe) {
+    public void setFuellFarbe(Color farbe) {
 
         for (TetrominoSpielstein block : viertelBloecke)
             block.setFuellFarbe(farbe);
@@ -72,9 +72,9 @@ public abstract class Tetromino implements TetrominoSpielstein {
             return;
 
         if (linienFarbe == null)
-            linienFarbe = new Farbe(0, 0, 0);
+            linienFarbe = new Color(0, 0, 0);
 
-        Farbe fuellFarbe = viertelBloecke.get(0).getFuellFarbe();
+        Color fuellFarbe = viertelBloecke.get(0).getFuellFarbe();
 
         for (TetrominoSpielstein block : viertelBloecke) {
 

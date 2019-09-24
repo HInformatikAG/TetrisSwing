@@ -1,5 +1,6 @@
 package com.hoffrogge.tetris.logik;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +18,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.hoffrogge.tetris.model.Farbe;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.TetrisMusikSpieler;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
@@ -247,7 +247,7 @@ public class Spiel implements Runnable {
 
         for (TetrominoSpielstein block : blockListe) {
 
-            block.setFuellFarbe(new Farbe(255, 60, 255));
+            block.setFuellFarbe(new Color(255, 60, 255));
             getGefalleneSteine().remove(block);
             hoehe = block.getY();
         }

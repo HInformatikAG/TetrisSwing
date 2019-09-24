@@ -1,10 +1,10 @@
 package com.hoffrogge.tetris.model.tetromino;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.Random;
 
-import com.hoffrogge.tetris.model.Farbe;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class ViertelBlock implements TetrominoSpielstein {
@@ -12,8 +12,8 @@ public class ViertelBlock implements TetrominoSpielstein {
     private int   x;
     private int   y;
     private int   kantenLaengeViertelBlock;
-    private Farbe linienFarbe;
-    private Farbe fuellFarbe;
+    private Color linienFarbe;
+    private Color fuellFarbe;
 
     public ViertelBlock(int x, int y) {
 
@@ -23,22 +23,22 @@ public class ViertelBlock implements TetrominoSpielstein {
 
         Random r = new Random();
 
-        fuellFarbe = new Farbe(r.nextInt(255), r.nextInt(255), r.nextInt(255));
-        linienFarbe = new Farbe(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+        fuellFarbe = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+        linienFarbe = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
     }
 
     @Override
-    public void setLinienFarbe(Farbe farbe) {
+    public void setLinienFarbe(Color farbe) {
         this.linienFarbe = farbe;
     }
 
     @Override
-    public Farbe getFuellFarbe() {
+    public Color getFuellFarbe() {
         return fuellFarbe;
     }
 
     @Override
-    public void setFuellFarbe(Farbe fuellFarbe) {
+    public void setFuellFarbe(Color fuellFarbe) {
         this.fuellFarbe = fuellFarbe;
     }
 
@@ -69,11 +69,11 @@ public class ViertelBlock implements TetrominoSpielstein {
             return;
 
         if (linienFarbe != null)
-            graphics.setColor(linienFarbe.konvertiereZuColor());
+            graphics.setColor(linienFarbe);
 
         graphics.drawRect(x, y, kantenLaengeViertelBlock, kantenLaengeViertelBlock);
 
-        graphics.setColor(fuellFarbe.konvertiereZuColor());
+        graphics.setColor(fuellFarbe);
 
         graphics.fillRect(x + 1, y + 1, kantenLaengeViertelBlock - 1, kantenLaengeViertelBlock - 1);
 

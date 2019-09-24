@@ -17,7 +17,7 @@ public class Spielfeld extends Canvas {
     /* Konstruktor */
     public Spielfeld(TetrominoFactory tetrominoFactory) {
 
-        setBackground(TetrisKonstanten.HINTERGRUND.konvertiereZuColor());
+        setBackground(TetrisKonstanten.HINTERGRUND);
         setBounds(TetrisKonstanten.SPIELFELD_POS_X, TetrisKonstanten.SPIELFELD_POS_Y, TetrisKonstanten.SPIELFELD_BREITE,
                 TetrisKonstanten.SPIELFELD_HOEHE);
     }
@@ -60,7 +60,7 @@ public class Spielfeld extends Canvas {
     private static void zeichneSpielfeld(Graphics g) {
 
         /* Hintergrund des Spielfeldes */
-        g.setColor(TetrisKonstanten.VORDERGRUND.konvertiereZuColor());
+        g.setColor(TetrisKonstanten.VORDERGRUND);
         g.fillRect(TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0, TetrisKonstanten.SPIELFELD_BREITE, TetrisKonstanten.SPIELFELD_HOEHE);
     }
 
@@ -68,7 +68,7 @@ public class Spielfeld extends Canvas {
 
         Font font = new Font("Arial Black", Font.BOLD, TetrisKonstanten.BLOCK_BREITE);
 
-        g.setColor(TetrisKonstanten.AKZENT.konvertiereZuColor());
+        g.setColor(TetrisKonstanten.AKZENT);
         g.setFont(font);
 
         g.drawString("Pause", TetrisKonstanten.SPIELFELD_BREITE / 2 - TetrisKonstanten.BLOCK_BREITE * 2, TetrisKonstanten.SPIELFELD_HOEHE / 2);
