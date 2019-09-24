@@ -12,10 +12,10 @@ public class TetrominoT extends Tetromino {
 
         durchmesser = TetrisKonstanten.BLOCK_BREITE * 3;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x, y + TetrisKonstanten.BLOCK_BREITE));
-        viertelBloecke.add(new ViertelBlock(x - TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
-        viertelBloecke.add(new ViertelBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
+        viertelBloecke.add(new TeilBlock(x, y));
+        viertelBloecke.add(new TeilBlock(x, y + TetrisKonstanten.BLOCK_BREITE));
+        viertelBloecke.add(new TeilBlock(x - TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
+        viertelBloecke.add(new TeilBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
     }
 
 }

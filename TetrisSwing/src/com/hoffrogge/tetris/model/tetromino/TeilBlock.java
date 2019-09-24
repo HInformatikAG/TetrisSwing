@@ -7,7 +7,7 @@ import java.util.Random;
 
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 
-public class ViertelBlock implements TetrominoSpielstein {
+public class TeilBlock implements TetrominoSpielstein {
 
     private int   x;
     private int   y;
@@ -15,7 +15,7 @@ public class ViertelBlock implements TetrominoSpielstein {
     private Color linienFarbe;
     private Color fuellFarbe;
 
-    public ViertelBlock(int x, int y) {
+    public TeilBlock(int x, int y) {
 
         this.x = x;
         this.y = y;
@@ -126,7 +126,7 @@ public class ViertelBlock implements TetrominoSpielstein {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ViertelBlock other = (ViertelBlock) obj;
+        TeilBlock other = (TeilBlock) obj;
         if (x != other.x)
             return false;
         if (y != other.y)

@@ -15,10 +15,10 @@ public class TetrominoBlock extends Tetromino {
         durchmesser = TetrisKonstanten.BLOCK_BREITE * 2;
         kantenLaengeViertelBlock = durchmesser / 2;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x + kantenLaengeViertelBlock, y));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock));
-        viertelBloecke.add(new ViertelBlock(x + kantenLaengeViertelBlock, y + kantenLaengeViertelBlock));
+        viertelBloecke.add(new TeilBlock(x, y));
+        viertelBloecke.add(new TeilBlock(x + kantenLaengeViertelBlock, y));
+        viertelBloecke.add(new TeilBlock(x, y + kantenLaengeViertelBlock));
+        viertelBloecke.add(new TeilBlock(x + kantenLaengeViertelBlock, y + kantenLaengeViertelBlock));
 
         for (TetrominoSpielstein block : viertelBloecke)
             block.setFuellFarbe(TetrisKonstanten.TETROMINO_FARBE_BLOCK);

@@ -15,10 +15,10 @@ public class TetrominoLanger extends Tetromino {
         durchmesser = TetrisKonstanten.BLOCK_BREITE;
         kantenLaengeViertelBlock = durchmesser;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock * 2));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock * 3));
+        viertelBloecke.add(new TeilBlock(x, y));
+        viertelBloecke.add(new TeilBlock(x, y + kantenLaengeViertelBlock));
+        viertelBloecke.add(new TeilBlock(x, y + kantenLaengeViertelBlock * 2));
+        viertelBloecke.add(new TeilBlock(x, y + kantenLaengeViertelBlock * 3));
     }
 
     @Override

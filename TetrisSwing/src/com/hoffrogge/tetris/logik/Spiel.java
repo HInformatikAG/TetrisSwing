@@ -263,6 +263,7 @@ public class Spiel implements Runnable {
 
         Collections.sort(getGefalleneSteine());
 
+        /* Integer ist Y-Koordinate */
         Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
 
         for (TetrominoSpielstein block : getGefalleneSteine()) {
