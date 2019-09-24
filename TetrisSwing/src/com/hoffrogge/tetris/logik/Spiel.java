@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.TetrisMusikSpieler;
+import com.hoffrogge.tetris.model.tetromino.TeilBlock;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
@@ -29,25 +30,25 @@ import com.hoffrogge.tetris.view.Vorschau;
 
 public class Spiel implements Runnable {
 
-    private TetrominoFactory          tetrominoFactory;
-    private Spielfeld                 spielfeld;
-    private Vorschau                  vorschau;
-    private Spielfenster              spielfenster;
+    private TetrominoFactory    tetrominoFactory;
+    private Spielfeld           spielfeld;
+    private Vorschau            vorschau;
+    private Spielfenster        spielfenster;
 
-    private boolean                   spielLaeuft;
-    private Thread                    spielThread;
-    private Thread                    soundThread;
+    private boolean             spielLaeuft;
+    private Thread              spielThread;
+    private Thread              soundThread;
 
-    private int                       level     = 1;
-    private int                       punkte    = 0;
-    private int                       highscore = 0;
-    private int                       reihen    = 0;
-    private boolean                   isPause;
-    private boolean                   isBeschleunigterFall;
+    private int                 level     = 1;
+    private int                 punkte    = 0;
+    private int                 highscore = 0;
+    private int                 reihen    = 0;
+    private boolean             isPause;
+    private boolean             isBeschleunigterFall;
 
-    private TetrominoTyp              naechsterSpielsteinTyp;
-    private TetrominoSpielstein       fallenderSpielstein;
-    private List<TetrominoSpielstein> gefalleneSteine;
+    private TetrominoTyp        naechsterSpielsteinTyp;
+    private TetrominoSpielstein fallenderSpielstein;
+    private List<TeilBlock>     gefalleneSteine;
 
     public Spiel(TetrominoFactory tetrominoFactory, Spielfeld spielfeld, Spielfenster spielfenster, Vorschau vorschau) {
 
@@ -122,7 +123,7 @@ public class Spiel implements Runnable {
         return fallenderSpielstein;
     }
 
-    public List<TetrominoSpielstein> getGefalleneSteine() {
+    public List<TeilBlock> getGefalleneSteine() {
         return gefalleneSteine;
     }
 
@@ -176,10 +177,10 @@ public class Spiel implements Runnable {
 
             if (hatFallenderSteinBodenErreicht() || faelltFallenderSteinAufAnderenStein()) {
 
-                List<TetrominoSpielstein> viertelBloecke = fallenderSpielstein.getViertelBloecke();
+                List<TeilBlock> teilBloecke = fallenderSpielstein.getTeilBloecke();
 
-                if (viertelBloecke != null)
-                    getGefalleneSteine().addAll(viertelBloecke);
+                if (teilBloecke != null)
+                    getGefalleneSteine().addAll(teilBloecke);
 
                 bestimmeNaechstenFallendenSpielstein();
 
@@ -241,18 +242,18 @@ public class Spiel implements Runnable {
         return getFallenderSpielstein().getTiefstesY() >= TetrisKonstanten.SPIELFELD_HOEHE;
     }
 
-    private void loescheReihe(List<TetrominoSpielstein> blockListe) {
+    private void loescheReihe(List<TeilBlock> blockListe) {
 
         int hoehe = 0;
 
-        for (TetrominoSpielstein block : blockListe) {
+        for (TeilBlock block : blockListe) {
 
             block.setFuellFarbe(new Color(255, 60, 255));
             getGefalleneSteine().remove(block);
             hoehe = block.getY();
         }
 
-        for (TetrominoSpielstein block : getGefalleneSteine())
+        for (TeilBlock block : getGefalleneSteine())
             if (block.getY() < hoehe)
                 block.bewegeNachUnten();
 
@@ -264,11 +265,11 @@ public class Spiel implements Runnable {
         Collections.sort(getGefalleneSteine());
 
         /* Integer ist Y-Koordinate */
-        Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
+        Map<Integer, List<TeilBlock>> bloeckeProReihe = new HashMap<>();
 
-        for (TetrominoSpielstein block : getGefalleneSteine()) {
+        for (TeilBlock block : getGefalleneSteine()) {
 
-            List<TetrominoSpielstein> blockListe = bloeckeProReihe.get(block.getY());
+            List<TeilBlock> blockListe = bloeckeProReihe.get(block.getY());
 
             if (blockListe == null)
                 blockListe = new ArrayList<>();
@@ -278,11 +279,9 @@ public class Spiel implements Runnable {
             bloeckeProReihe.put(block.getY(), blockListe);
         }
 
-        // TODO hier wird implizit angenommen, das die blockListe aus
-        // ViertelBloecken besteht, dass muss noch besser gekapselt werden
-        for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
+        for (Entry<Integer, List<TeilBlock>> reihe : bloeckeProReihe.entrySet()) {
 
-            List<TetrominoSpielstein> blockListe = reihe.getValue();
+            List<TeilBlock> blockListe = reihe.getValue();
 
             if (blockListe.size() == TetrisKonstanten.SPIELFELD_BREITE / TetrisKonstanten.BLOCK_BREITE)
                 loescheReihe(blockListe);

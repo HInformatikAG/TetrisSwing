@@ -86,7 +86,7 @@ public class Vorschau extends Canvas {
 
             TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp, xKoordinate, yKoordinate);
 
-            for (TetrominoSpielstein teilblock : naechsterSpielstein.getViertelBloecke())
+            for (TetrominoSpielstein teilblock : naechsterSpielstein.getTeilBloecke())
                 teilblock.setFuellFarbe(FUELL_FARBE);
 
             // TODO: Vorschau zeichnet Blöcke zu oft, evtl. als Listener beim
