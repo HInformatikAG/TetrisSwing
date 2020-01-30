@@ -1,5 +1,7 @@
 package com.hoffrogge.tetris.model;
 
+import java.awt.Color;
+
 public class TetrisKonstanten {
 
     private TetrisKonstanten() {
@@ -36,12 +38,12 @@ public class TetrisKonstanten {
     public static final int     SPIEL_GESCHWINDIGKEIT_MIN = 50;
     public static final int     TETROMINO_FALL_HOEHE      = BLOCK_BREITE;
 
-    public static final Farbe   HINTERGRUND               = new Farbe(251, 246, 242);
-    public static final Farbe   VORDERGRUND               = new Farbe(250, 250, 250);
-    public static final Farbe   TEXT                      = new Farbe(55, 63, 81);
-    public static final Farbe   RAHMEN                    = new Farbe(141, 167, 190);
-    public static final Farbe   AKZENT                    = new Farbe(200, 70, 48);
+    public static final Color   HINTERGRUND               = new Color(251, 246, 242);
+    public static final Color   VORDERGRUND               = new Color(250, 250, 250);
+    public static final Color   TEXT                      = new Color(55, 63, 81);
+    public static final Color   RAHMEN                    = new Color(141, 167, 190);
+    public static final Color   AKZENT                    = new Color(200, 70, 48);
 
-    public static final Farbe   TETROMINO_FARBE_BLOCK     = new Farbe(200, 70, 48);
+    public static final Color   TETROMINO_FARBE_BLOCK     = new Color(200, 70, 48);
 
 }

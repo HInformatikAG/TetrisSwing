@@ -15,9 +15,9 @@ public class Main {
     public static void main(String[] args) {
 
 	/*
-	 * =========================================================================
-	 * Diese Factory ist dafür zuständig, Spielsteine zu generieren. Mit deiner
-	 * eigenen Factory kannst du hier deine eigenen Spielsteine einbauen.
+	 * ========================================================================= Diese
+	 * Factory ist dafür zuständig, Spielsteine zu generieren. Mit deiner eigenen
+	 * Factory kannst du hier deine eigenen Spielsteine einbauen.
 	 * =========================================================================
 	 */
 	TetrominoFactory tetrominoFactory = new StandardTetrominoFactory();

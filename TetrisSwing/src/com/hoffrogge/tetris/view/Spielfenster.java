@@ -24,7 +24,7 @@ public class Spielfenster extends JFrame {
 
         getContentPane().add(vorschau);
 
-        getContentPane().setBackground(TetrisKonstanten.HINTERGRUND.konvertiereZuColor());
+        getContentPane().setBackground(TetrisKonstanten.HINTERGRUND);
 
         setTitle("Hoffrogge Tetris Klon");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,23 +40,23 @@ public class Spielfenster extends JFrame {
         JLabel levelLabel = new JLabel("Level");
         levelLabel.setFont(font);
         levelLabel.setBounds(TetrisKonstanten.LABEL_LINKS_POS_X, TetrisKonstanten.LABEL_LINKS_POS_Y, 100, 25);
-        levelLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        levelLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(levelLabel);
 
         JLabel reihenLabel = new JLabel("Reihen");
         reihenLabel.setFont(font);
         reihenLabel.setBounds(TetrisKonstanten.LABEL_LINKS_POS_X, TetrisKonstanten.LABEL_LINKS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 2, 100, 25);
-        reihenLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        reihenLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(reihenLabel);
 
         JLabel punkteLabel = new JLabel("Punkte");
         punkteLabel.setFont(font);
         punkteLabel.setBounds(TetrisKonstanten.LABEL_LINKS_POS_X, TetrisKonstanten.LABEL_LINKS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 4, 100, 25);
-        punkteLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        punkteLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(punkteLabel);
 
         JLabel lblHighscore = new JLabel("Highscore");
-        lblHighscore.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        lblHighscore.setForeground(TetrisKonstanten.TEXT);
         lblHighscore.setFont(font);
         lblHighscore.setBounds(TetrisKonstanten.LABEL_LINKS_POS_X, TetrisKonstanten.LABEL_LINKS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 6, 100, 25);
         getContentPane().add(lblHighscore);
@@ -65,26 +65,26 @@ public class Spielfenster extends JFrame {
         levelWertLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         levelWertLabel.setFont(font);
         levelWertLabel.setBounds(TetrisKonstanten.LABEL_RECHTS_POS_X, TetrisKonstanten.LABEL_RECHTS_POS_Y, 100, 25);
-        levelWertLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        levelWertLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(levelWertLabel);
 
         reihenWertLabel = new JLabel("New label");
         reihenWertLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         reihenWertLabel.setFont(font);
         reihenWertLabel.setBounds(TetrisKonstanten.LABEL_RECHTS_POS_X, TetrisKonstanten.LABEL_RECHTS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 2, 100, 25);
-        reihenWertLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        reihenWertLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(reihenWertLabel);
 
         punkteWertLabel = new JLabel("New label");
         punkteWertLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         punkteWertLabel.setFont(font);
         punkteWertLabel.setBounds(TetrisKonstanten.LABEL_RECHTS_POS_X, TetrisKonstanten.LABEL_RECHTS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 4, 100, 25);
-        punkteWertLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        punkteWertLabel.setForeground(TetrisKonstanten.TEXT);
         getContentPane().add(punkteWertLabel);
 
         highscoreWertLabel = new JLabel("New label");
         highscoreWertLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        highscoreWertLabel.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        highscoreWertLabel.setForeground(TetrisKonstanten.TEXT);
         highscoreWertLabel.setFont(font);
         highscoreWertLabel.setBounds(TetrisKonstanten.LABEL_RECHTS_POS_X, TetrisKonstanten.LABEL_RECHTS_POS_Y + TetrisKonstanten.BLOCK_BREITE * 6, 100, 25);
         getContentPane().add(highscoreWertLabel);
@@ -92,21 +92,21 @@ public class Spielfenster extends JFrame {
         Font steuerungFont = new Font("Arial", Font.PLAIN, 12);
         JLabel lblPauseMitP = new JLabel("Pause mit P");
         lblPauseMitP.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblPauseMitP.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        lblPauseMitP.setForeground(TetrisKonstanten.TEXT);
         lblPauseMitP.setFont(steuerungFont);
         lblPauseMitP.setBounds(460, 780, 150, 25);
         getContentPane().add(lblPauseMitP);
 
         JLabel lblDrehenMitQ = new JLabel("Drehen mit Q, E");
         lblDrehenMitQ.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblDrehenMitQ.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        lblDrehenMitQ.setForeground(TetrisKonstanten.TEXT);
         lblDrehenMitQ.setFont(steuerungFont);
         lblDrehenMitQ.setBounds(460, 744, 150, 25);
         getContentPane().add(lblDrehenMitQ);
 
         JLabel lblBewegenMitPfeiltasten = new JLabel("Bewegen mit Pfeiltasten");
         lblBewegenMitPfeiltasten.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblBewegenMitPfeiltasten.setForeground(TetrisKonstanten.TEXT.konvertiereZuColor());
+        lblBewegenMitPfeiltasten.setForeground(TetrisKonstanten.TEXT);
         lblBewegenMitPfeiltasten.setFont(steuerungFont);
         lblBewegenMitPfeiltasten.setBounds(450, 708, 160, 25);
         getContentPane().add(lblBewegenMitPfeiltasten);

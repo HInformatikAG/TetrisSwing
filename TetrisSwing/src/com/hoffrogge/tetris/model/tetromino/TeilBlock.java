@@ -1,66 +1,44 @@
 package com.hoffrogge.tetris.model.tetromino;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.Random;
 
-import com.hoffrogge.tetris.model.Farbe;
-import com.hoffrogge.tetris.model.Punkt;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 
-public class ViertelBlock implements TetrominoSpielstein {
+public class TeilBlock implements TetrominoSpielstein {
 
     private int   x;
     private int   y;
-    private int   kantenLaengeViertelBlock;
-    private Farbe linienFarbe;
-    private Farbe fuellFarbe;
+    private int   kantenLaengeTeilBlock;
+    private Color linienFarbe;
+    private Color fuellFarbe;
 
-    public ViertelBlock(int x, int y) {
+    public TeilBlock(int x, int y) {
 
         this.x = x;
         this.y = y;
-        kantenLaengeViertelBlock = TetrisKonstanten.BLOCK_BREITE;
+        kantenLaengeTeilBlock = TetrisKonstanten.BLOCK_BREITE;
 
         Random r = new Random();
 
-        fuellFarbe = new Farbe(r.nextInt(255), r.nextInt(255), r.nextInt(255));
-        linienFarbe = new Farbe(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+        fuellFarbe = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+        linienFarbe = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
     }
 
     @Override
-    public void setMittelpunkt(Punkt mittelpunkt) {
-        this.x = mittelpunkt.getX();
-        this.y = mittelpunkt.getY();
-    }
-
-    @Override
-    public Punkt getMittelPunkt() {
-        return new Punkt(x, y);
-    }
-
-    @Override
-    public void setDurchmesser(int d) {
-        this.kantenLaengeViertelBlock = d;
-    }
-
-    @Override
-    public void setLinienFarbe(Farbe farbe) {
+    public void setLinienFarbe(Color farbe) {
         this.linienFarbe = farbe;
     }
 
     @Override
-    public Farbe getLinienFarbe() {
-        return linienFarbe;
-    }
-
-    @Override
-    public Farbe getFuellFarbe() {
+    public Color getFuellFarbe() {
         return fuellFarbe;
     }
 
     @Override
-    public void setFuellFarbe(Farbe fuellFarbe) {
+    public void setFuellFarbe(Color fuellFarbe) {
         this.fuellFarbe = fuellFarbe;
     }
 
@@ -91,13 +69,13 @@ public class ViertelBlock implements TetrominoSpielstein {
             return;
 
         if (linienFarbe != null)
-            graphics.setColor(linienFarbe.konvertiereZuColor());
+            graphics.setColor(linienFarbe);
 
-        graphics.drawRect(x, y, kantenLaengeViertelBlock, kantenLaengeViertelBlock);
+        graphics.drawRect(x, y, kantenLaengeTeilBlock, kantenLaengeTeilBlock);
 
-        graphics.setColor(fuellFarbe.konvertiereZuColor());
+        graphics.setColor(fuellFarbe);
 
-        graphics.fillRect(x + 1, y + 1, kantenLaengeViertelBlock - 1, kantenLaengeViertelBlock - 1);
+        graphics.fillRect(x + 1, y + 1, kantenLaengeTeilBlock - 1, kantenLaengeTeilBlock - 1);
 
     }
 
@@ -108,7 +86,7 @@ public class ViertelBlock implements TetrominoSpielstein {
 
     @Override
     public int getTiefstesY() {
-        return y + kantenLaengeViertelBlock;
+        return y + kantenLaengeTeilBlock;
     }
 
     @Override
@@ -118,7 +96,7 @@ public class ViertelBlock implements TetrominoSpielstein {
 
     @Override
     public int getKanteRechtsX() {
-        return x + kantenLaengeViertelBlock;
+        return x + kantenLaengeTeilBlock;
     }
 
     @Override
@@ -148,7 +126,7 @@ public class ViertelBlock implements TetrominoSpielstein {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ViertelBlock other = (ViertelBlock) obj;
+        TeilBlock other = (TeilBlock) obj;
         if (x != other.x)
             return false;
         if (y != other.y)
@@ -158,31 +136,31 @@ public class ViertelBlock implements TetrominoSpielstein {
 
     @Override
     public void bewegeNachRechts() {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr bewegt werden!");
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr bewegt werden!");
     }
 
     @Override
     public void bewegeNachLinks() {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr bewegt werden!");
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr bewegt werden!");
     }
 
     @Override
     public boolean faelltAuf(TetrominoSpielstein block) {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr fallen!");
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr fallen!");
     }
 
     @Override
     public void rotiereNachLinks() {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr rotiert werden!");
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr rotiert werden!");
     }
 
     @Override
     public void rotiereNachRechts() {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr rotiert werden!");
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr rotiert werden!");
     }
 
     @Override
-    public List<TetrominoSpielstein> getViertelBloecke() {
-        throw new IllegalStateException("Ein Viertelblock darf nicht mehr aufgeteilt werden!");
+    public List<TeilBlock> getTeilBloecke() {
+        throw new IllegalStateException("Ein Teilblock darf nicht mehr aufgeteilt werden!");
     }
 }

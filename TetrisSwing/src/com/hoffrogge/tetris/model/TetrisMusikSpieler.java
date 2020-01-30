@@ -11,6 +11,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+//FIXME funktioniert nicht auf allen Platformen
 public class TetrisMusikSpieler implements Runnable {
 
     @Override

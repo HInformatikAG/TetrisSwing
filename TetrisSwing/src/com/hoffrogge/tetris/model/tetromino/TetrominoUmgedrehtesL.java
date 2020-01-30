@@ -4,7 +4,7 @@ import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class TetrominoUmgedrehtesL extends Tetromino {
 
-    private int kantenLaengeViertelBlock;
+    private int kantenLaengeTeilBlock;
 
     public TetrominoUmgedrehtesL() {
         this(TetrisKonstanten.SPIELFELD_BREITE / 2, -TetrisKonstanten.BLOCK_BREITE * 4);
@@ -12,15 +12,12 @@ public class TetrominoUmgedrehtesL extends Tetromino {
 
     public TetrominoUmgedrehtesL(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
         durchmesser = TetrisKonstanten.BLOCK_BREITE;
-        kantenLaengeViertelBlock = durchmesser;
+        kantenLaengeTeilBlock = durchmesser;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock * 2));
-        viertelBloecke.add(new ViertelBlock(x - kantenLaengeViertelBlock, y + kantenLaengeViertelBlock * 2));
+        teilBloecke.add(new TeilBlock(x, y));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock * 2));
+        teilBloecke.add(new TeilBlock(x - kantenLaengeTeilBlock, y + kantenLaengeTeilBlock * 2));
     }
 }

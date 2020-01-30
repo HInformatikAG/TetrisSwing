@@ -1,5 +1,9 @@
 package com.hoffrogge.tetris.model;
 
+/**
+ * Diese Klasse kapselt einen Punkt in einem zweidimensionalen Koordinatensystem
+ * mit X- und Y-Koordinaten.
+ */
 public class Punkt {
 
     private int x;

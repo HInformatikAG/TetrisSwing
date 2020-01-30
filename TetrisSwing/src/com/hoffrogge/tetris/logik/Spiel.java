@@ -1,5 +1,6 @@
 package com.hoffrogge.tetris.logik;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,9 +18,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.hoffrogge.tetris.model.Farbe;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.TetrisMusikSpieler;
+import com.hoffrogge.tetris.model.tetromino.TeilBlock;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
@@ -29,25 +30,25 @@ import com.hoffrogge.tetris.view.Vorschau;
 
 public class Spiel implements Runnable {
 
-    private TetrominoFactory          tetrominoFactory;
-    private Spielfeld                 spielfeld;
-    private Vorschau                  vorschau;
-    private Spielfenster              spielfenster;
+    private TetrominoFactory    tetrominoFactory;
+    private Spielfeld           spielfeld;
+    private Vorschau            vorschau;
+    private Spielfenster        spielfenster;
 
-    private boolean                   spielLaeuft;
-    private Thread                    spielThread;
-    private Thread                    soundThread;
+    private boolean             spielLaeuft;
+    private Thread              spielThread;
+    private Thread              soundThread;
 
-    private int                       level     = 1;
-    private int                       punkte    = 0;
-    private int                       highscore = 0;
-    private int                       reihen    = 0;
-    private boolean                   isPause;
-    private boolean                   isBeschleunigterFall;
+    private int                 level     = 1;
+    private int                 punkte    = 0;
+    private int                 highscore = 0;
+    private int                 reihen    = 0;
+    private boolean             isPause;
+    private boolean             isBeschleunigterFall;
 
-    private TetrominoTyp              naechsterSpielsteinTyp;
-    private TetrominoSpielstein       fallenderSpielstein;
-    private List<TetrominoSpielstein> gefalleneSteine;
+    private TetrominoTyp        naechsterSpielsteinTyp;
+    private TetrominoSpielstein fallenderSpielstein;
+    private List<TeilBlock>     gefalleneSteine;
 
     public Spiel(TetrominoFactory tetrominoFactory, Spielfeld spielfeld, Spielfenster spielfenster, Vorschau vorschau) {
 
@@ -57,17 +58,16 @@ public class Spiel implements Runnable {
         this.spielfenster = spielfenster;
 
         this.naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
-        this.fallenderSpielstein = neuerZufaelligerSpielstein();
         this.gefalleneSteine = new CopyOnWriteArrayList<>();
 
         this.spielfeld.setSpiel(this);
-
         this.spielLaeuft = true;
     }
 
     public void starteSpiel() {
 
         highscoreLaden();
+        bestimmeNaechstenFallendenSpielstein();
 
         spielThread = new Thread(this);
         spielThread.start();
@@ -93,7 +93,6 @@ public class Spiel implements Runnable {
             }
 
             spielfeld.zeichnen();
-            vorschau.zeichnen();
 
             if (istSpielfeldVoll()) {
 
@@ -124,7 +123,7 @@ public class Spiel implements Runnable {
         return fallenderSpielstein;
     }
 
-    public List<TetrominoSpielstein> getGefalleneSteine() {
+    public List<TeilBlock> getGefalleneSteine() {
         return gefalleneSteine;
     }
 
@@ -178,10 +177,10 @@ public class Spiel implements Runnable {
 
             if (hatFallenderSteinBodenErreicht() || faelltFallenderSteinAufAnderenStein()) {
 
-                List<TetrominoSpielstein> viertelBloecke = fallenderSpielstein.getViertelBloecke();
+                List<TeilBlock> teilBloecke = fallenderSpielstein.getTeilBloecke();
 
-                if (viertelBloecke != null)
-                    getGefalleneSteine().addAll(viertelBloecke);
+                if (teilBloecke != null)
+                    getGefalleneSteine().addAll(teilBloecke);
 
                 bestimmeNaechstenFallendenSpielstein();
 
@@ -201,12 +200,12 @@ public class Spiel implements Runnable {
     }
 
     private void erhoehePunkte() {
-    
+
         if (isBeschleunigterFall())
             punkte += level * 3 + 21;
         else
             punkte += level * 3 + 3;
-    
+
         pruefeUndSetzeLevel();
     }
 
@@ -219,11 +218,11 @@ public class Spiel implements Runnable {
     }
 
     private TetrominoSpielstein neuerZufaelligerSpielstein() {
-    
+
         TetrominoSpielstein tetromino = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
-    
+
         naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
-    
+
         return tetromino;
     }
 
@@ -243,18 +242,18 @@ public class Spiel implements Runnable {
         return getFallenderSpielstein().getTiefstesY() >= TetrisKonstanten.SPIELFELD_HOEHE;
     }
 
-    private void loescheReihe(List<TetrominoSpielstein> blockListe) {
+    private void loescheReihe(List<TeilBlock> blockListe) {
 
         int hoehe = 0;
 
-        for (TetrominoSpielstein block : blockListe) {
+        for (TeilBlock block : blockListe) {
 
-            block.setFuellFarbe(new Farbe(255, 60, 255));
+            block.setFuellFarbe(new Color(255, 60, 255));
             getGefalleneSteine().remove(block);
             hoehe = block.getY();
         }
 
-        for (TetrominoSpielstein block : getGefalleneSteine())
+        for (TeilBlock block : getGefalleneSteine())
             if (block.getY() < hoehe)
                 block.bewegeNachUnten();
 
@@ -265,11 +264,12 @@ public class Spiel implements Runnable {
 
         Collections.sort(getGefalleneSteine());
 
-        Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
+        /* Integer ist Y-Koordinate */
+        Map<Integer, List<TeilBlock>> bloeckeProReihe = new HashMap<>();
 
-        for (TetrominoSpielstein block : getGefalleneSteine()) {
+        for (TeilBlock block : getGefalleneSteine()) {
 
-            List<TetrominoSpielstein> blockListe = bloeckeProReihe.get(block.getY());
+            List<TeilBlock> blockListe = bloeckeProReihe.get(block.getY());
 
             if (blockListe == null)
                 blockListe = new ArrayList<>();
@@ -279,9 +279,9 @@ public class Spiel implements Runnable {
             bloeckeProReihe.put(block.getY(), blockListe);
         }
 
-        for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
+        for (Entry<Integer, List<TeilBlock>> reihe : bloeckeProReihe.entrySet()) {
 
-            List<TetrominoSpielstein> blockListe = reihe.getValue();
+            List<TeilBlock> blockListe = reihe.getValue();
 
             if (blockListe.size() == TetrisKonstanten.SPIELFELD_BREITE / TetrisKonstanten.BLOCK_BREITE)
                 loescheReihe(blockListe);
@@ -342,19 +342,19 @@ public class Spiel implements Runnable {
     }
 
     private void beendeSpiel() {
-    
+
         spielLaeuft = false;
-    
+
         try {
-    
+
             if (TetrisKonstanten.MUSIK_AN)
                 soundThread.join();
-    
+
         } catch (InterruptedException e) {
             Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
             Thread.currentThread().interrupt();
         }
-    
+
         highscoreSpeichern();
     }
 }

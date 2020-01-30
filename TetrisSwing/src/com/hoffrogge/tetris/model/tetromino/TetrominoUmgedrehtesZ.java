@@ -10,13 +10,10 @@ public class TetrominoUmgedrehtesZ extends Tetromino {
 
     public TetrominoUmgedrehtesZ(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x, y + TetrisKonstanten.BLOCK_BREITE));
-        viertelBloecke.add(new ViertelBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
-        viertelBloecke.add(new ViertelBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE * 2));
+        teilBloecke.add(new TeilBlock(x, y));
+        teilBloecke.add(new TeilBlock(x, y + TetrisKonstanten.BLOCK_BREITE));
+        teilBloecke.add(new TeilBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE));
+        teilBloecke.add(new TeilBlock(x + TetrisKonstanten.BLOCK_BREITE, y + TetrisKonstanten.BLOCK_BREITE * 2));
     }
 
 }

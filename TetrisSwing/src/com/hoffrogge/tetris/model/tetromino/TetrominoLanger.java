@@ -4,7 +4,7 @@ import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class TetrominoLanger extends Tetromino {
 
-    private int kantenLaengeViertelBlock;
+    private int kantenLaengeTeilBlock;
 
     public TetrominoLanger() {
         this(TetrisKonstanten.SPIELFELD_BREITE / 2, -TetrisKonstanten.BLOCK_BREITE * 4);
@@ -12,27 +12,24 @@ public class TetrominoLanger extends Tetromino {
 
     public TetrominoLanger(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
         durchmesser = TetrisKonstanten.BLOCK_BREITE;
-        kantenLaengeViertelBlock = durchmesser;
+        kantenLaengeTeilBlock = durchmesser;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock * 2));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock * 3));
+        teilBloecke.add(new TeilBlock(x, y));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock * 2));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock * 3));
     }
 
     @Override
     public void rotiereNachLinks() {
 
-        if (viertelBloecke.size() != 4)
+        if (teilBloecke.size() != 4)
             throw new IllegalStateException("Der Tetromino hat keine vier Bloecke!");
 
-        TetrominoSpielstein ersterBlock = viertelBloecke.get(0);
-        TetrominoSpielstein dritterBlock = viertelBloecke.get(2);
-        TetrominoSpielstein vierterBlock = viertelBloecke.get(3);
+        TetrominoSpielstein ersterBlock = teilBloecke.get(0);
+        TetrominoSpielstein dritterBlock = teilBloecke.get(2);
+        TetrominoSpielstein vierterBlock = teilBloecke.get(3);
 
         boolean senkrecht = ersterBlock.getX() == vierterBlock.getX();
 

@@ -1,25 +1,15 @@
 package com.hoffrogge.tetris.model.tetromino;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.List;
-
-import com.hoffrogge.tetris.model.Farbe;
-import com.hoffrogge.tetris.model.GeometrischeFigur;
 
 /**
  * Definition eines Tetris-Spielsteins als TetrominoSpielstein. Dieses Interface
- * erbt von {@link GeometrischeFigur} und {@link Comparable}. D. h. ein
- * TetrominoSpielstein ist auch eine GeometrischeFigur und die Spielsteine
- * lassen sich sortieren.
+ * erbt von {@link Comparable}. D. h. ein TetrominoSpielstein kann mit einem
+ * anderen verglichen werden, dies ist wichtig fuer Sortierung.
  */
-public interface TetrominoSpielstein extends GeometrischeFigur, Comparable<TetrominoSpielstein> {
-
-    int getHoechstesY();
-
-    int getTiefstesY();
-
-    int getKanteLinksX();
-
-    int getKanteRechtsX();
+public interface TetrominoSpielstein extends Comparable<TetrominoSpielstein> {
 
     int getX();
 
@@ -28,6 +18,14 @@ public interface TetrominoSpielstein extends GeometrischeFigur, Comparable<Tetro
     int getY();
 
     void setY(int y);
+
+    int getHoechstesY();
+
+    int getTiefstesY();
+
+    int getKanteLinksX();
+
+    int getKanteRechtsX();
 
     void bewegeNachUnten();
 
@@ -45,10 +43,14 @@ public interface TetrominoSpielstein extends GeometrischeFigur, Comparable<Tetro
      * Jeder TetrominoSpielstein ist aus bis zu vier einzelnen, quadratischen
      * Blöcken aufgebaut.
      */
-    List<TetrominoSpielstein> getViertelBloecke();
+    List<TeilBlock> getTeilBloecke();
 
-    Farbe getFuellFarbe();
+    Color getFuellFarbe();
 
-    void setFuellFarbe(Farbe farbe);
+    void setFuellFarbe(Color farbe);
+
+    void setLinienFarbe(Color farbe);
+
+    void zeichnen(Graphics graphics);
 
 }

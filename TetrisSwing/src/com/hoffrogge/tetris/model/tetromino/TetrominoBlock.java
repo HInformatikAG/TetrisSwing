@@ -4,7 +4,7 @@ import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class TetrominoBlock extends Tetromino {
 
-    private int kantenLaengeViertelBlock;
+    private int kantenLaengeTeilBlock;
 
     public TetrominoBlock() {
         this(TetrisKonstanten.SPIELFELD_BREITE / 2, -TetrisKonstanten.BLOCK_BREITE * 2);
@@ -12,18 +12,15 @@ public class TetrominoBlock extends Tetromino {
 
     public TetrominoBlock(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-
         durchmesser = TetrisKonstanten.BLOCK_BREITE * 2;
-        kantenLaengeViertelBlock = durchmesser / 2;
+        kantenLaengeTeilBlock = durchmesser / 2;
 
-        viertelBloecke.add(new ViertelBlock(x, y));
-        viertelBloecke.add(new ViertelBlock(x + kantenLaengeViertelBlock, y));
-        viertelBloecke.add(new ViertelBlock(x, y + kantenLaengeViertelBlock));
-        viertelBloecke.add(new ViertelBlock(x + kantenLaengeViertelBlock, y + kantenLaengeViertelBlock));
+        teilBloecke.add(new TeilBlock(x, y));
+        teilBloecke.add(new TeilBlock(x + kantenLaengeTeilBlock, y));
+        teilBloecke.add(new TeilBlock(x, y + kantenLaengeTeilBlock));
+        teilBloecke.add(new TeilBlock(x + kantenLaengeTeilBlock, y + kantenLaengeTeilBlock));
 
-        for (TetrominoSpielstein block : viertelBloecke)
+        for (TetrominoSpielstein block : teilBloecke)
             block.setFuellFarbe(TetrisKonstanten.TETROMINO_FARBE_BLOCK);
     }
 
