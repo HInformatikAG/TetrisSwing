@@ -1,114 +1,69 @@
 package com.hoffrogge.tetris.start;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.hoffrogge.tetris.logik.Spiel;
+import com.hoffrogge.tetris.model.tetromino.StandardTetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
-import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
-import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
 import com.hoffrogge.tetris.view.Spielfeld;
 import com.hoffrogge.tetris.view.Spielfenster;
+import com.hoffrogge.tetris.view.TetrisKeyListener;
 import com.hoffrogge.tetris.view.Vorschau;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        /*
-         * ====================================================================
-         * Diese Factory ist dafür zuständig, Spielsteine zu generieren. Mit
-         * deiner eigenen Factory kannst du hier deine eigenen Spielsteine
-         * einbauen.
-         * ====================================================================
-         */
-        TetrominoFactory tetrominoFactory = new TetrominoFactory() {
+	/*
+	 * =========================================================================
+	 * Diese Factory ist dafür zuständig, Spielsteine zu generieren. Mit deiner
+	 * eigenen Factory kannst du hier deine eigenen Spielsteine einbauen.
+	 * =========================================================================
+	 */
+	TetrominoFactory tetrominoFactory = new StandardTetrominoFactory();
 
-            /*
-             * Dies ist eine anonyme Implementierung, die nur dafür da ist,
-             * damit der Code compiliert und keine Fehler wirft. Du kannst sie
-             * entfernen und gegen deine eigene TetrominoFactory austauschen.
-             */
+	/*
+	 * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die Spielsteine. Das
+	 * Spielfeld kann Tetrisspielsteine nicht beeinflussen.
+	 */
+	Spielfeld spielfeld = new Spielfeld(tetrominoFactory);
 
-            @Override
-            public TetrominoTyp erstelleZufaelligenTetrominoTyp() {
-                return null;
-            }
+	/*
+	 * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie nicht
+	 * tun.
+	 */
+	Vorschau vorschau = new Vorschau(tetrominoFactory);
 
-            @Override
-            public TetrominoSpielstein erstelleTetromino(TetrominoTyp typ, int x, int y) {
-                return null;
-            }
+	/*
+	 * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore, Level,
+	 * Punkte und Reihen. Das Spielfenster kann Spielsteine nicht beeinflussen.
+	 */
+	Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
 
-            @Override
-            public TetrominoSpielstein erstelleTetromino(TetrominoTyp tetrominoTyp) {
-                return null;
-            }
-        };
+	/*
+	 * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen von
+	 * Spielsteinen oder die Berechnung von Punkten. Das Spiel kann nichts
+	 * darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur dem Spielfeld
+	 * Informationen geben, die das Spielfeld dann darstellt.
+	 */
+	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster, vorschau);
 
-        /*
-         * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die
-         * Spielsteine. Das Spielfeld kann Tetrisspielsteine nicht beeinflussen.
-         */
-        Spielfeld spielfeld = new Spielfeld(tetrominoFactory);
+	/*
+	 * =========================================================================
+	 * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
+	 * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
+	 * Spiel weiter. Ohne den KeyListener läuft das Spiel, ohne das der Spieler
+	 * etwas machen kann. Hier musst du deinen KeyListener einbauen.
+	 * =========================================================================
+	 */
+	KeyListener tetrisKeyListener = new TetrisKeyListener(spiel);
 
-        /*
-         * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie
-         * nicht tun.
-         */
-        Vorschau vorschau = new Vorschau(tetrominoFactory);
+	/*
+	 * Der KeyListener muss an einer Komponente hängen, die angezeigt wird, in
+	 * diesem Fall eignet sich das Spielfenster dafür.
+	 */
+	spielfenster.addKeyListener(tetrisKeyListener);
 
-        /*
-         * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore,
-         * Level, Punkte und Reihen. Das Spielfenster kann Spielsteine nicht
-         * beeinflussen.
-         */
-        Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
-
-        /*
-         * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen
-         * von Spielsteinen oder die Berechnung von Punkten. Das Spiel kann
-         * nichts darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur
-         * dem Spielfeld Informationen geben, die das Spielfeld dann darstellt.
-         */
-        Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster, vorschau);
-
-        /*
-         * ====================================================================
-         * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links,
-         * rechts, runter, drehen, Pause). Er erkennt Tastatureingaben und
-         * reicht diese an das Spiel weiter. Ohne den KeyListener läuft das
-         * Spiel, ohne das der Spieler etwas machen kann. Hier musst du deinen
-         * KeyListener einbauen.
-         * ====================================================================
-         */
-        KeyListener tetrisKeyListener = new KeyListener() {
-
-            /*
-             * Dies ist eine anonyme Implementierung, die nur dafür da ist,
-             * damit der Code compiliert und keine Fehler wirft. Du kannst sie
-             * entfernen und gegen deinen eigenen KeyListener austauschen.
-             */
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-        };
-
-        /*
-         * Der KeyListener muss an einer Komponente hängen, die angezeigt wird,
-         * in diesem Fall eignet sich das Spielfenster dafür.
-         */
-        spielfenster.addKeyListener(tetrisKeyListener);
-
-        spiel.starteSpiel();
+	spiel.starteSpiel();
     }
 }
