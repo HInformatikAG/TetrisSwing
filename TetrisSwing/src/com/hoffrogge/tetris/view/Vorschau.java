@@ -17,6 +17,9 @@ public class Vorschau extends Canvas {
     private TetrominoTyp naechsterSpielsteinTyp;
     private TetrominoFactory tetrominoFactory;
 
+    // TODO die Vorschau muss die Factory gar nicht kennen, es sollte völlig
+    // reichen, wenn sie den Spielstein kennt, oder besser noch, einfach nur ein
+    // zeichenbares Objekt bekommt (den Spielstein)
     public Vorschau(TetrominoFactory tetrominoFactory) {
 
 	this.tetrominoFactory = tetrominoFactory;
