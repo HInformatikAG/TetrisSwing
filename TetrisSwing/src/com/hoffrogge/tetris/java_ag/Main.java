@@ -1,0 +1,67 @@
+package com.hoffrogge.tetris.java_ag;
+
+import java.awt.event.KeyListener;
+
+import com.hoffrogge.tetris.logik.Spiel;
+import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
+import com.hoffrogge.tetris.view.Spielfeld;
+import com.hoffrogge.tetris.view.Spielfenster;
+import com.hoffrogge.tetris.view.Vorschau;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+	/*
+	 * =========================================================================
+	 * Diese Factory ist dafür zuständig, Spielsteine zu generieren.
+	 * =========================================================================
+	 */
+	TetrominoFactory tetrominoFactory = new JavaAGTetrominoFactory();
+
+	/*
+	 * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die Spielsteine. Das
+	 * Spielfeld kann Tetrisspielsteine nicht beeinflussen.
+	 */
+	Spielfeld spielfeld = new Spielfeld(tetrominoFactory);
+
+	/*
+	 * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie nicht
+	 * tun.
+	 */
+	Vorschau vorschau = new Vorschau(tetrominoFactory);
+
+	/*
+	 * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore, Level,
+	 * Punkte und Reihen. Das Spielfenster kann Spielsteine nicht beeinflussen.
+	 */
+	Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
+
+	/*
+	 * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen von
+	 * Spielsteinen oder die Berechnung von Punkten. Das Spiel kann nichts
+	 * darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur dem Spielfeld
+	 * Informationen geben, die das Spielfeld dann darstellt.
+	 */
+	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster, vorschau);
+
+	/*
+	 * =========================================================================
+	 * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
+	 * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
+	 * Spiel weiter. Ohne den KeyListener läuft das Spiel, ohne das der Spieler
+	 * etwas machen kann.
+	 * =========================================================================
+	 */
+	KeyListener tetrisKeyListener = new JavaAGTetrisKeyListener();
+
+	/*
+	 * Der KeyListener muss an einer Komponente hängen, die angezeigt wird, in
+	 * diesem Fall eignet sich das Spielfenster dafür.
+	 */
+	spielfenster.addKeyListener(tetrisKeyListener);
+
+	/* Das Spiel wird gestartet. */
+	spiel.starteSpiel();
+    }
+}
