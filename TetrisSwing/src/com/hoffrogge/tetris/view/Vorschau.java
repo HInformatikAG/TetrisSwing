@@ -17,6 +17,8 @@ public class Vorschau extends Canvas {
     private TetrominoTyp naechsterSpielsteinTyp;
     private TetrominoFactory tetrominoFactory;
 
+    private TetrominoSpielstein naechsterSpielstein;
+
     // TODO die Vorschau muss die Factory gar nicht kennen, es sollte völlig
     // reichen, wenn sie den Spielstein kennt, oder besser noch, einfach nur ein
     // zeichenbares Objekt bekommt (den Spielstein)
@@ -88,18 +90,10 @@ public class Vorschau extends Canvas {
 		throw new IllegalStateException("TetrominoTyp " + naechsterSpielsteinTyp + " ist nicht bekannt!");
 	    }
 
-	    // TODO So umbauen, dass x/y Koordinaten nicht mehr notwendig sind. Damit das
-	    // Interface der Factory einfacher wird.
-	    TetrominoSpielstein naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp,
-		    xKoordinate, yKoordinate);
+	    naechsterSpielstein = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp, xKoordinate, yKoordinate);
 
 	    for (TetrominoSpielstein teilblock : naechsterSpielstein.getTeilBloecke())
 		teilblock.setFuellFarbe(FUELL_FARBE);
-
-	    // TODO: Vorschau zeichnet Blöcke zu oft, evtl. als Listener beim
-	    // Spiel registrieren und nur bei Aenderungen am naechsten
-	    // Spielstein zeichnen
-	    naechsterSpielstein.zeichnen(g);
 
 	} finally {
 	    if (g != null)
@@ -114,5 +108,12 @@ public class Vorschau extends Canvas {
 	/* Hintergrund des Feldes */
 	g.setColor(TetrisKonstanten.VORDERGRUND);
 	g.fillRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE);
+
+	// TODO: Vorschau zeichnet Blöcke zu oft, evtl. als Listener beim
+	// Spiel registrieren und nur bei Aenderungen am naechsten
+	// Spielstein zeichnen
+
+	if (naechsterSpielstein != null)
+	    naechsterSpielstein.zeichnen(g);
     }
 }
