@@ -17,60 +17,66 @@ public class Spielfeld extends Canvas {
     /* Konstruktor */
     public Spielfeld(TetrominoFactory tetrominoFactory) {
 
-        setBackground(TetrisKonstanten.HINTERGRUND);
-        setBounds(TetrisKonstanten.SPIELFELD_POS_X, TetrisKonstanten.SPIELFELD_POS_Y, TetrisKonstanten.SPIELFELD_BREITE,
-                TetrisKonstanten.SPIELFELD_HOEHE);
+	setBackground(TetrisKonstanten.HINTERGRUND);
+	setBounds(TetrisKonstanten.SPIELFELD_POS_X, TetrisKonstanten.SPIELFELD_POS_Y, TetrisKonstanten.SPIELFELD_BREITE,
+		TetrisKonstanten.SPIELFELD_HOEHE);
     }
 
     public void setSpiel(Spiel spiel) {
-        this.spiel = spiel;
+	this.spiel = spiel;
     }
 
     public void zeichnen() {
 
-        Graphics g = null;
+	Graphics g = null;
 
-        try {
+	try {
 
-            g = getBufferStrategy().getDrawGraphics();
+	    g = getBufferStrategy().getDrawGraphics();
 
-            zeichneSpielfeld(g);
+	    zeichneSpielfeld(g);
 
-            if (!spiel.isPause()) {
+	    if (!spiel.isPause()) {
 
-                TetrominoSpielstein fallenderSpielstein = spiel.getFallenderSpielstein();
+		TetrominoSpielstein fallenderSpielstein = spiel.getFallenderSpielstein();
 
-                if (fallenderSpielstein != null)
-                    fallenderSpielstein.zeichnen(g);
+		if (fallenderSpielstein != null)
+		    fallenderSpielstein.zeichnen(g);
 
-                for (TetrominoSpielstein gefallenerStein : spiel.getGefalleneSteine())
-                    gefallenerStein.zeichnen(g);
+		for (TetrominoSpielstein gefallenerStein : spiel.getGefalleneSteine())
+		    gefallenerStein.zeichnen(g);
 
-            } else
-                zeichnePauseSchriftzug(g);
+	    } else
+		zeichneSchriftzug(g, "Pause");
 
-        } finally {
-            if (g != null)
-                g.dispose();
-        }
+	    if (spiel.istSpielfeldVoll())
+		zeichneSchriftzug(g, "Game Over");
 
-        getBufferStrategy().show();
+	} finally {
+	    if (g != null)
+		g.dispose();
+	}
+
+	getBufferStrategy().show();
     }
 
     private static void zeichneSpielfeld(Graphics g) {
 
-        /* Hintergrund des Spielfeldes */
-        g.setColor(TetrisKonstanten.VORDERGRUND);
-        g.fillRect(TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0, TetrisKonstanten.SPIELFELD_BREITE, TetrisKonstanten.SPIELFELD_HOEHE);
+	/* Hintergrund des Spielfeldes */
+	g.setColor(TetrisKonstanten.VORDERGRUND);
+	g.fillRect(TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0, TetrisKonstanten.SPIELFELD_BREITE,
+		TetrisKonstanten.SPIELFELD_HOEHE);
     }
 
-    private static void zeichnePauseSchriftzug(Graphics g) {
+    private static void zeichneSchriftzug(Graphics g, String text) {
 
-        Font font = new Font("Arial Black", Font.BOLD, TetrisKonstanten.BLOCK_BREITE);
+	Font font = new Font("Arial Black", Font.BOLD, (int) (TetrisKonstanten.BLOCK_BREITE * 1.4));
 
-        g.setColor(TetrisKonstanten.AKZENT);
-        g.setFont(font);
+	g.setColor(TetrisKonstanten.AKZENT);
+	g.setFont(font);
 
-        g.drawString("Pause", TetrisKonstanten.SPIELFELD_BREITE / 2 - TetrisKonstanten.BLOCK_BREITE * 2, TetrisKonstanten.SPIELFELD_HOEHE / 2);
+
+	g.drawString(text, TetrisKonstanten.BLOCK_BREITE ,
+		TetrisKonstanten.SPIELFELD_HOEHE / 2);
     }
 }
