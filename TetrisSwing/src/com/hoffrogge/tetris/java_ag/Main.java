@@ -8,16 +8,34 @@ import com.hoffrogge.tetris.view.Spielfeld;
 import com.hoffrogge.tetris.view.Spielfenster;
 import com.hoffrogge.tetris.view.Vorschau;
 
+/**
+ * Dies ist die Klasse, die eine "main Methode" enthaelt. Hier wird das Programm
+ * gestartet.
+ */
 public class Main {
 
     public static void main(String[] args) {
 
 	/*
 	 * =========================================================================
-	 * Diese Factory ist dafür zuständig, Spielsteine zu generieren.
+	 * Diese Factory ist dafür zustaendig, Spielsteine zu generieren.
+	 *
+	 * AUFGABE: Implementiere deine eigene Factory.
 	 * =========================================================================
 	 */
 	TetrominoFactory tetrominoFactory = new JavaAGTetrominoFactory();
+
+	/*
+	 * =========================================================================
+	 * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
+	 * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
+	 * Spiel weiter. Ohne den KeyListener laeuft das Spiel, aber der Spieler kann
+	 * nichts machen.
+	 *
+	 * AUFGABE: Implementiere deinen eigenen KeyListener.
+	 * =========================================================================
+	 */
+	KeyListener tetrisKeyListener = new JavaAGTetrisKeyListener();
 
 	/*
 	 * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die Spielsteine. Das
@@ -26,10 +44,10 @@ public class Main {
 	Spielfeld spielfeld = new Spielfeld(tetrominoFactory);
 
 	/*
-	 * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie nicht
+	 * Die Vorschau zeigt den jeweils naechsten Spielstein an. Mehr kann sie nicht
 	 * tun.
 	 */
-	Vorschau vorschau = new Vorschau(tetrominoFactory);
+	Vorschau vorschau = new Vorschau();
 
 	/*
 	 * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore, Level,
@@ -38,26 +56,22 @@ public class Main {
 	Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
 
 	/*
-	 * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen von
+	 * Das Spiel enthaelt alles an Logik, die es braucht, z. B. das Drehen von
 	 * Spielsteinen oder die Berechnung von Punkten. Das Spiel kann nichts
 	 * darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur dem Spielfeld
 	 * Informationen geben, die das Spielfeld dann darstellt.
 	 */
-	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster, vorschau);
+	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster);
 
 	/*
-	 * =========================================================================
-	 * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
-	 * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
-	 * Spiel weiter. Ohne den KeyListener läuft das Spiel, ohne das der Spieler
-	 * etwas machen kann.
-	 * =========================================================================
+	 * Die Vorschau beobachtet das Spielfeld, damit sie den jeweils naechsten
+	 * Spielstein sehen und darstellen kann.
 	 */
-	KeyListener tetrisKeyListener = new JavaAGTetrisKeyListener();
+	spiel.addObserver(vorschau);
 
 	/*
-	 * Der KeyListener muss an einer Komponente hängen, die angezeigt wird, in
-	 * diesem Fall eignet sich das Spielfenster dafür.
+	 * Der KeyListener muss an einer Komponente haengen, die angezeigt wird, in
+	 * diesem Fall eignet sich das Spielfenster dafuer.
 	 */
 	spielfenster.addKeyListener(tetrisKeyListener);
 

@@ -24,18 +24,4 @@ public interface TetrominoFactory {
      */
     TetrominoSpielstein erstelleTetromino(TetrominoTyp tetrominoTyp);
 
-    /**
-     * Erstellt einen Tetromino-Spielstein mit dem Typ, der als Parameter
-     * angegeben ist, mit den angegebenen x- und y-Koordinaten.
-     * 
-     * @param tetrominoTyp
-     *            {@link TetrominoTyp}
-     * @param x
-     *            Koordinate
-     * @param y
-     *            Koordinate
-     * @return neue Instanz von {@link TetrominoSpielstein}
-     */
-    TetrominoSpielstein erstelleTetromino(TetrominoTyp typ, int x, int y);
-
 }

@@ -1,6 +1,9 @@
 package com.hoffrogge.tetris.logik;
 
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,13 +29,17 @@ import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
 import com.hoffrogge.tetris.view.Spielfeld;
 import com.hoffrogge.tetris.view.Spielfenster;
-import com.hoffrogge.tetris.view.Vorschau;
 
 public class Spiel implements Runnable {
 
+    /**
+     * Eventtyp fuer ein {@link PropertyChangeEvent}, das ausgeloest wird, sobald
+     * sich der Spielsteintyp aendert.
+     */
+    public static final String NAECHSTER_SPIELSTEIN_TYP = "naechsterSpielsteinTyp";
+
     private TetrominoFactory tetrominoFactory;
     private Spielfeld spielfeld;
-    private Vorschau vorschau;
     private Spielfenster spielfenster;
 
     private boolean spielLaeuft;
@@ -47,27 +54,30 @@ public class Spiel implements Runnable {
     private boolean isBeschleunigterFall;
 
     private TetrominoTyp naechsterSpielsteinTyp;
+    private TetrominoSpielstein naechsterSpielstein;
     private TetrominoSpielstein fallenderSpielstein;
     private List<TeilBlock> gefalleneSteine;
 
-    public Spiel(TetrominoFactory tetrominoFactory, Spielfeld spielfeld, Spielfenster spielfenster, Vorschau vorschau) {
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    public Spiel(TetrominoFactory tetrominoFactory, Spielfeld spielfeld, Spielfenster spielfenster) {
 
 	this.tetrominoFactory = tetrominoFactory;
 	this.spielfeld = spielfeld;
-	this.vorschau = vorschau;
 	this.spielfenster = spielfenster;
 
-	this.naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
 	this.gefalleneSteine = new CopyOnWriteArrayList<>();
 
 	this.spielfeld.setSpiel(this);
 	this.spielLaeuft = true;
+
     }
 
     public void starteSpiel() {
 
 	highscoreLaden();
-	bestimmeNaechstenFallendenSpielstein();
+
+	naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
 
 	spielThread = new Thread(this);
 	spielThread.start();
@@ -86,11 +96,8 @@ public class Spiel implements Runnable {
 
 	    aktualisierePunkteUndLevelUndReihen();
 
-	    if (!isPause()) {
-
+	    if (!isPause())
 		aktualisiereSpiel();
-		vorschau.aktualisieren(naechsterSpielsteinTyp);
-	    }
 
 	    spielfeld.zeichnen();
 
@@ -158,7 +165,12 @@ public class Spiel implements Runnable {
      * anderer Stein oder eine Wand im Weg ist.
      */
     public boolean passtGedrehterSpielstein(TetrominoSpielstein spielstein) {
-	// TODO Auto-generated method stub
+	// TODO falls kein Teilnehmer der Java AG es schafft
+	/*
+	 * =============================================================================
+	 * EXTRAAUFGABE: Implementiere diese Methode.
+	 * =============================================================================
+	 */
 	return true;
     }
 
@@ -170,7 +182,11 @@ public class Spiel implements Runnable {
 
 	loescheVolleReihen();
 
-	TetrominoSpielstein fallenderSpielstein = getFallenderSpielstein();
+	if (fallenderSpielstein == null) {
+
+	    fallenderSpielstein = naechsterSpielstein;
+	    naechsterSpielstein = neuerZufaelligerSpielstein();
+	}
 
 	if (fallenderSpielstein != null) {
 
@@ -183,7 +199,7 @@ public class Spiel implements Runnable {
 		if (teilBloecke != null)
 		    getGefalleneSteine().addAll(teilBloecke);
 
-		bestimmeNaechstenFallendenSpielstein();
+		fallenderSpielstein = null;
 
 		erhoehePunkte();
 	    }
@@ -214,17 +230,25 @@ public class Spiel implements Runnable {
 	reihen++;
     }
 
-    private void bestimmeNaechstenFallendenSpielstein() {
-	fallenderSpielstein = neuerZufaelligerSpielstein();
-    }
-
     private TetrominoSpielstein neuerZufaelligerSpielstein() {
 
 	TetrominoSpielstein tetromino = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
 
-	naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
+	naechsterSpielsteinTyp = getNeachsterSpielsteinTyp();
 
 	return tetromino;
+    }
+
+    private TetrominoTyp getNeachsterSpielsteinTyp() {
+
+	TetrominoTyp vorherigerSpielsteinTyp = naechsterSpielsteinTyp;
+
+	naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
+
+	propertyChangeSupport.firePropertyChange(NAECHSTER_SPIELSTEIN_TYP, vorherigerSpielsteinTyp,
+		naechsterSpielsteinTyp);
+
+	return naechsterSpielsteinTyp;
     }
 
     private boolean faelltFallenderSteinAufAnderenStein() {
@@ -358,5 +382,9 @@ public class Spiel implements Runnable {
 	}
 
 	highscoreSpeichern();
+    }
+
+    public void addObserver(PropertyChangeListener observer) {
+	propertyChangeSupport.addPropertyChangeListener(observer);
     }
 }

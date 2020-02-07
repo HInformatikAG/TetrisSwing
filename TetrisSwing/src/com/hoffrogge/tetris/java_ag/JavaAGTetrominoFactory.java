@@ -9,21 +9,39 @@ import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
  */
 public class JavaAGTetrominoFactory implements TetrominoFactory {
 
+    /*
+     * =============================================================================
+     * HINWEIS: Die Methoden in dieser Klasse musst du korrekt implementieren, aber
+     * du musst sie nicht selbst aufrufen. Die Klasse "Spiel" ruft diese Methoden
+     * auf.
+     * =============================================================================
+     */
+
     @Override
     public TetrominoTyp erstelleZufaelligenTetrominoTyp() {
-	// TODO Auto-generated method stub
+
+	/*
+	 * =============================================================================
+	 * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteintypen
+	 * auswaehlen und zurueckgeben. Noch nicht den fertigen Spielstein (siehe Klasse
+	 * "TetrominoSpielstein"), sondern nur den Typen, siehe Klasse "TetrominoTyp".
+	 * =============================================================================
+	 */
+
 	return null;
     }
 
     @Override
     public TetrominoSpielstein erstelleTetromino(TetrominoTyp tetrominoTyp) {
-	// TODO Auto-generated method stub
-	return null;
-    }
 
-    @Override
-    public TetrominoSpielstein erstelleTetromino(TetrominoTyp typ, int x, int y) {
-	// TODO Auto-generated method stub
+	/*
+	 * =============================================================================
+	 * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteine erstellen
+	 * und zwar einen Spielstein, der zum Typ der Variablen "tetrominoTyp" passt,
+	 * die als Parameter vorgegeben ist.
+	 * =============================================================================
+	 */
+
 	return null;
     }
 }

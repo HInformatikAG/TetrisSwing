@@ -46,35 +46,4 @@ public class StandardTetrominoFactory implements TetrominoFactory {
                 throw new IllegalStateException("TetrominoTyp " + typ + " ist nicht bekannt!");
         }
     }
-
-    @Override
-    public TetrominoSpielstein erstelleTetromino(TetrominoTyp typ, int x, int y) {
-
-        switch (typ) {
-
-            case BLOCK:
-                return new TetrominoBlock(x, y);
-
-            case LANGER:
-                return new TetrominoLanger(x, y);
-
-            case L:
-                return new TetrominoL(x, y);
-
-            case UMGEDREHTES_L:
-                return new TetrominoUmgedrehtesL(x, y);
-
-            case T:
-                return new TetrominoT(x, y);
-
-            case Z:
-                return new TetrominoZ(x, y);
-
-            case UMGEDREHTES_Z:
-                return new TetrominoUmgedrehtesZ(x, y);
-
-            default:
-                throw new IllegalStateException("TetrominoTyp " + typ + " ist nicht bekannt!");
-        }
-    }
 }
