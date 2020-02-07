@@ -76,13 +76,21 @@ public class Spielfeld extends Canvas {
 
     private static void zeichneSchriftzug(Graphics g, String text) {
 
-	Font font = new Font("Arial Black", Font.CENTER_BASELINE, TetrisKonstanten.BLOCK_BREITE);
+	Font font = new Font("Arial Black", Font.PLAIN, TetrisKonstanten.BLOCK_BREITE);
 
-	g.setColor(TetrisKonstanten.TEXT);
 	g.setFont(font);
 
 	int textBreite = g.getFontMetrics().stringWidth(text);
 
+	g.setColor(TetrisKonstanten.HINTERGRUND);
+	g.fillRect(TetrisKonstanten.BLOCK_BREITE, TetrisKonstanten.SPIELFELD_HOEHE / 2 - TetrisKonstanten.BLOCK_BREITE,
+		TetrisKonstanten.SPIELFELD_BREITE - TetrisKonstanten.BLOCK_BREITE * 2, TetrisKonstanten.BLOCK_BREITE);
+
+	g.setColor(TetrisKonstanten.RAHMEN);
+	g.drawRect(TetrisKonstanten.BLOCK_BREITE, TetrisKonstanten.SPIELFELD_HOEHE / 2 - TetrisKonstanten.BLOCK_BREITE,
+		TetrisKonstanten.SPIELFELD_BREITE - TetrisKonstanten.BLOCK_BREITE * 2, TetrisKonstanten.BLOCK_BREITE);
+
+	g.setColor(TetrisKonstanten.TEXT);
 	g.drawString(text, TetrisKonstanten.SPIELFELD_BREITE / 2 - textBreite / 2,
 		TetrisKonstanten.SPIELFELD_HOEHE / 2);
     }
