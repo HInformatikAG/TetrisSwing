@@ -54,12 +54,12 @@ public class Spielfeld extends Canvas {
 	    if (spiel.istSpielfeldVoll())
 		zeichneSchriftzug(g, "Game Over");
 
+	    getBufferStrategy().show();
+
 	} finally {
 	    if (g != null)
 		g.dispose();
 	}
-
-	getBufferStrategy().show();
     }
 
     private void zeichneSpielfeld(Graphics g) {

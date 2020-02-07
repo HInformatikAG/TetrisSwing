@@ -32,8 +32,6 @@ public class Vorschau extends Canvas implements PropertyChangeListener {
 		TetrisKonstanten.VORSCHAU_HOEHE);
     }
 
-    // FIXME es kommt manchmal vor, dass das allererste Event im Spiel nicht ankommt
-    // und der "erste naechste" Spielstein deswegen nicht in der Vorschau auftaucht.
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
@@ -50,33 +48,21 @@ public class Vorschau extends Canvas implements PropertyChangeListener {
 	for (TetrominoSpielstein teilblock : naechsterSpielstein.getTeilBloecke())
 	    teilblock.setFuellFarbe(FUELL_FARBE);
 
-	zeichnen();
+	repaint();
     }
 
-    private void zeichnen() {
+    @Override
+    public void paint(Graphics g) {
 
-	Graphics g = null;
+	/* Hintergrund des Feldes */
+	g.setColor(TetrisKonstanten.VORDERGRUND);
+	g.fill3DRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE, true);
 
-	try {
+	/* Rahmen */
+	g.setColor(TetrisKonstanten.RAHMEN);
+	g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
-	    g = getBufferStrategy().getDrawGraphics();
-
-	    /* Hintergrund des Feldes */
-	    g.setColor(TetrisKonstanten.VORDERGRUND);
-	    g.fill3DRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE, true);
-
-	    /* Rahmen */
-	    g.setColor(TetrisKonstanten.RAHMEN);
-	    g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-
-	    if (naechsterSpielstein != null)
-		naechsterSpielstein.zeichnen(g);
-
-	} finally {
-	    if (g != null)
-		g.dispose();
-	}
-
-	getBufferStrategy().show();
+	if (naechsterSpielstein != null)
+	    naechsterSpielstein.zeichnen(g);
     }
 }

@@ -70,7 +70,6 @@ public class Spiel implements Runnable {
 
 	this.spielfeld.setSpiel(this);
 	this.spielLaeuft = true;
-
     }
 
     public void starteSpiel() {
@@ -99,7 +98,7 @@ public class Spiel implements Runnable {
 	    if (!isPause())
 		aktualisiereSpiel();
 
-	    spielfeld.zeichnen();
+	    zeichneSpielfeld();
 
 	    if (istSpielfeldVoll()) {
 
