@@ -2,7 +2,9 @@ package com.hoffrogge.tetris.view;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -113,6 +115,12 @@ public class Spielfenster extends JFrame {
 	lblPauseMitP.setBounds(TetrisKonstanten.SPIELFELD_BREITE + TetrisKonstanten.BLOCK_BREITE * 2,
 		TetrisKonstanten.SPIELFELD_HOEHE, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.BLOCK_BREITE);
 	getContentPane().add(lblPauseMitP);
+
+	URL resource = getClass().getResource("tetrisIcon.png");
+
+	ImageIcon icon = new ImageIcon(resource);
+
+	setIconImage(icon.getImage());
 
 	setVisible(true);
 
