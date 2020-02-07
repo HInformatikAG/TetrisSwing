@@ -63,7 +63,11 @@ public class Vorschau extends Canvas implements PropertyChangeListener {
 
 	    /* Hintergrund des Feldes */
 	    g.setColor(TetrisKonstanten.VORDERGRUND);
-	    g.fillRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE);
+	    g.fill3DRect(0, 0, TetrisKonstanten.VORSCHAU_BREITE, TetrisKonstanten.VORSCHAU_HOEHE, true);
+
+	    /* Rahmen */
+	    g.setColor(TetrisKonstanten.RAHMEN);
+	    g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
 	    if (naechsterSpielstein != null)
 		naechsterSpielstein.zeichnen(g);

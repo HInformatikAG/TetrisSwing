@@ -18,6 +18,8 @@ public class Spielfeld extends Canvas {
     public Spielfeld(TetrominoFactory tetrominoFactory) {
 
 	setBackground(TetrisKonstanten.HINTERGRUND);
+	setForeground(TetrisKonstanten.VORDERGRUND);
+
 	setBounds(TetrisKonstanten.SPIELFELD_POS_X, TetrisKonstanten.SPIELFELD_POS_Y, TetrisKonstanten.SPIELFELD_BREITE,
 		TetrisKonstanten.SPIELFELD_HOEHE);
     }
@@ -60,23 +62,28 @@ public class Spielfeld extends Canvas {
 	getBufferStrategy().show();
     }
 
-    private static void zeichneSpielfeld(Graphics g) {
+    private void zeichneSpielfeld(Graphics g) {
 
 	/* Hintergrund des Spielfeldes */
 	g.setColor(TetrisKonstanten.VORDERGRUND);
-	g.fillRect(TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0, TetrisKonstanten.SPIELFELD_BREITE,
-		TetrisKonstanten.SPIELFELD_HOEHE);
+	g.fill3DRect(TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0, TetrisKonstanten.SPIELFELD_BREITE,
+		TetrisKonstanten.SPIELFELD_HOEHE, true);
+
+	/* Rahmen */
+	g.setColor(TetrisKonstanten.RAHMEN);
+	g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
     }
 
     private static void zeichneSchriftzug(Graphics g, String text) {
 
-	Font font = new Font("Arial Black", Font.BOLD, (int) (TetrisKonstanten.BLOCK_BREITE * 1.4));
+	Font font = new Font("Arial Black", Font.CENTER_BASELINE, TetrisKonstanten.BLOCK_BREITE);
 
-	g.setColor(TetrisKonstanten.AKZENT);
+	g.setColor(TetrisKonstanten.TEXT);
 	g.setFont(font);
 
+	int textBreite = g.getFontMetrics().stringWidth(text);
 
-	g.drawString(text, TetrisKonstanten.BLOCK_BREITE ,
+	g.drawString(text, TetrisKonstanten.SPIELFELD_BREITE / 2 - textBreite / 2,
 		TetrisKonstanten.SPIELFELD_HOEHE / 2);
     }
 }
