@@ -73,7 +73,7 @@ public abstract class Tetromino implements TetrominoSpielstein {
 			return;
 
 		if (linienFarbe == null)
-			linienFarbe = TetrisKonstanten.RAHMEN;
+			linienFarbe = Color.DARK_GRAY;
 
 		Color fuellFarbe = teilBloecke.get(0).getFuellFarbe();
 
