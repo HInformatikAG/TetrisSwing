@@ -5,7 +5,7 @@ import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
 
 /**
- * Diese Factory ist dafür zuständig, Spielsteine zu generieren.
+ * Diese Factory ist dafÃ¼r zustÃ¤ndig, Spielsteine zu generieren.
  */
 public class JavaAGTetrominoFactory implements TetrominoFactory {
 

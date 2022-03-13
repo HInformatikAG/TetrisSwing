@@ -97,7 +97,7 @@ public class TetrisKeyListener implements KeyListener {
         }
 
         /*
-         * Nach einer Tastatureingabe soll sofort die Änderung gezeichnet
+         * Nach einer Tastatureingabe soll sofort die Ã„nderung gezeichnet
          * werden.
          */
         spiel.zeichneSpielfeld();

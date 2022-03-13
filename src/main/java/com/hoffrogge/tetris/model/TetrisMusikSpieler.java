@@ -1,17 +1,12 @@
 package com.hoffrogge.tetris.model;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-//FIXME funktioniert nicht auf allen Platformen
+//FIXME funktioniert nicht auf allen Plattformen
 public class TetrisMusikSpieler implements Runnable {
 
     @Override

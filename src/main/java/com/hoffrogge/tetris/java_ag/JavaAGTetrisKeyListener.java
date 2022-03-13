@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 /**
  * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
  * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
- * Spiel weiter. Ohne den KeyListener läuft das Spiel, aber der Spieler kann
+ * Spiel weiter. Ohne den KeyListener lÃ¤uft das Spiel, aber der Spieler kann
  * nichts machen.
  */
 public class JavaAGTetrisKeyListener implements KeyListener {
