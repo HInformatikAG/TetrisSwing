@@ -17,6 +17,7 @@ public class TetrisKeyListener implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         /* nichts zu tun */
+    	System.out.println();
     }
 
     @Override
