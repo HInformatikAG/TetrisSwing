@@ -8,6 +8,8 @@
 /* Definition des Packages, in dem die Klasse sich befindet */
 package com.hoffrogge.lehreinheiten.lehreinheit04;
 
+import com.hoffrogge.tetris.model.Punkt;
+
 import java.awt.*;
 
 /*

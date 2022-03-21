@@ -10,15 +10,20 @@ public class Punkt {
     private int y;
 
     public Punkt(int x, int y) {
-	this.x = x;
-	this.y = y;
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {
-	return x;
+        return x;
     }
 
     public int getY() {
-	return y;
+        return y;
+    }
+
+    @Override
+    public String toString() {
+        return "[x = " + x + "] [y = " + y + "]";
     }
 }

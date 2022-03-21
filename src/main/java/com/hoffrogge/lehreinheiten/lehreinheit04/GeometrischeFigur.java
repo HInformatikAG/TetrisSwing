@@ -1,5 +1,7 @@
 package com.hoffrogge.lehreinheiten.lehreinheit04;
 
+import com.hoffrogge.tetris.model.Punkt;
+
 import java.awt.*;
 
 public interface GeometrischeFigur {
