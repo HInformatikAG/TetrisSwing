@@ -64,7 +64,7 @@ public class Main {
 	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster);
 
 	/*
-	 * Die Vorschau beobachtet das Spielfeld, damit sie den jeweils naechsten
+	 * Die Vorschau beobachtet das Spiel, damit sie den jeweils naechsten
 	 * Spielstein sehen und darstellen kann.
 	 */
 	spiel.addObserver(vorschau);
