@@ -50,44 +50,44 @@ public class Zeichenbrett extends JPanel {
 
     public Zeichenbrett() {
 
-	setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 
-	zeichenflaeche = new BufferedImage(KANTEN_LAENGE + 1, KANTEN_LAENGE + 1, BufferedImage.TYPE_INT_RGB);
+        zeichenflaeche = new BufferedImage(KANTEN_LAENGE + 1, KANTEN_LAENGE + 1, BufferedImage.TYPE_INT_RGB);
 
-	Graphics g2d = zeichenflaeche.getGraphics();
-	g2d.setColor(Color.WHITE);
-	g2d.fillRect(0, 0, zeichenflaeche.getWidth(), zeichenflaeche.getHeight());
+        Graphics g2d = zeichenflaeche.getGraphics();
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(0, 0, zeichenflaeche.getWidth(), zeichenflaeche.getHeight());
 
-	g2d.dispose();
+        g2d.dispose();
 
-	fenster = new JFrame();
-	fenster.setTitle(MessageFormat.format("Zeichenbrett {0} x {1}", KANTEN_LAENGE, KANTEN_LAENGE));
+        fenster = new JFrame();
+        fenster.setTitle(MessageFormat.format("Zeichenbrett {0} x {1}", KANTEN_LAENGE, KANTEN_LAENGE));
 
-	URL resource = getClass().getResource("LehreinheitenIcon.png");
-	ImageIcon icon = new ImageIcon(resource);
-	fenster.setIconImage(icon.getImage());
+        URL resource = getClass().getResource("LehreinheitenIcon.png");
+        ImageIcon icon = new ImageIcon(resource);
+        fenster.setIconImage(icon.getImage());
 
-	Container fensterInhalt = fenster.getContentPane();
-	fensterInhalt.setLayout(new BorderLayout());
+        Container fensterInhalt = fenster.getContentPane();
+        fensterInhalt.setLayout(new BorderLayout());
 
-	fensterInhalt.add(this, BorderLayout.CENTER);
-	fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fensterInhalt.add(this, BorderLayout.CENTER);
+        fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	fenster.setSize(new Dimension(KANTEN_LAENGE + 20, KANTEN_LAENGE + 43));
+        fenster.setSize(new Dimension(KANTEN_LAENGE + 20, KANTEN_LAENGE + 43));
 
-	/*
-	 * Kleiner Trick, um das Fenster in der Mitte des Bildschirms anzuzeigen
-	 */
-	fenster.setLocationRelativeTo(null);
-	fenster.setVisible(true);
+        /*
+         * Kleiner Trick, um das Fenster in der Mitte des Bildschirms anzuzeigen
+         */
+        fenster.setLocationRelativeTo(null);
+        fenster.setVisible(true);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
 
-	super.paintComponent(g);
+        super.paintComponent(g);
 
-	g.drawImage(zeichenflaeche, 2, 2, this);
+        g.drawImage(zeichenflaeche, 2, 2, this);
     }
 
     /**
@@ -95,11 +95,11 @@ public class Zeichenbrett extends JPanel {
      */
     public void zeichneGeometrischeFigur(GeometrischeFigur geometrischeFigur) {
 
-	Graphics g2d = zeichenflaeche.getGraphics();
+        Graphics g2d = zeichenflaeche.getGraphics();
 
-	geometrischeFigur.zeichnen(g2d);
+        geometrischeFigur.zeichnen(g2d);
 
-	g2d.dispose();
+        g2d.dispose();
     }
 
     /**
@@ -107,9 +107,9 @@ public class Zeichenbrett extends JPanel {
      */
     public void zeichneLinie(int x1, int y1, int x2, int y2) {
 
-	Graphics g2d = zeichenflaeche.getGraphics();
+        Graphics g2d = zeichenflaeche.getGraphics();
 
-	g2d.setColor(Color.BLACK);
-	g2d.drawLine(x1, y1, x2, y2);
+        g2d.setColor(Color.BLACK);
+        g2d.drawLine(x1, y1, x2, y2);
     }
 }
