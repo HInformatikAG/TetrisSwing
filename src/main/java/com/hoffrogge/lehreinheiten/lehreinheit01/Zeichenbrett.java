@@ -112,4 +112,15 @@ public class Zeichenbrett extends JPanel {
         g2d.setColor(Color.BLACK);
         g2d.drawLine(x1, y1, x2, y2);
     }
+
+    /**
+     * Zeichnet eine Linie vom Punkt x1, y1 zum Punkt x2, y2 mit der Farbe "farbe"
+     */
+    public void zeichneFarbigeLinie(int x1, int y1, int x2, int y2, Color farbe) {
+
+        Graphics g2d = zeichenflaeche.getGraphics();
+
+        g2d.setColor(farbe);
+        g2d.drawLine(x1, y1, x2, y2);
+    }
 }
