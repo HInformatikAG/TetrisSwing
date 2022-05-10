@@ -1,6 +1,6 @@
-package com.hoffrogge.lehreinheiten.lehreinheit05;
+package com.hoffrogge.lehreinheiten.lehreinheit06;
 
-import com.hoffrogge.lehreinheiten.lehreinheit04.Rechteck;
+import com.hoffrogge.lehreinheiten.lehreinheit05.Rechteck;
 
 import java.util.ArrayList;
 import java.util.HashSet;

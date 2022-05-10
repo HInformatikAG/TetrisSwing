@@ -1,4 +1,4 @@
-package com.hoffrogge.lehreinheiten.lehreinheit04;
+package com.hoffrogge.lehreinheiten.lehreinheit05;
 
 import com.hoffrogge.tetris.model.Punkt;
 

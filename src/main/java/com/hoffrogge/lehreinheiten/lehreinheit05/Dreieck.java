@@ -6,7 +6,7 @@
  **/
 
 /* Definition des Packages, in dem die Klasse sich befindet */
-package com.hoffrogge.lehreinheiten.lehreinheit04;
+package com.hoffrogge.lehreinheiten.lehreinheit05;
 
 import com.hoffrogge.tetris.model.Punkt;
 
@@ -55,8 +55,8 @@ public class Dreieck implements GeometrischeFigur {
      * haben.
      */
     public Dreieck() {
-	// erstellt eine Instanz dieser Klasse, ohne Aenderungen an den
-	// Feldern/Variablen vorzunehmen
+        // erstellt eine Instanz dieser Klasse, ohne Aenderungen an den
+        // Feldern/Variablen vorzunehmen
     }
 
     /*
@@ -67,6 +67,7 @@ public class Dreieck implements GeometrischeFigur {
      * Konstruktoren sind Methoden) muessen zwei Parameter uebergeben werden, die
      * vom Typ int sind. Z. B. new GleichseitigesDreieck(100, 100);
      */
+
     /**
      * Dreieck mit dem Mittelpunkt x, y
      *
@@ -75,14 +76,14 @@ public class Dreieck implements GeometrischeFigur {
      */
     public Dreieck(int x, int y) {
 
-	/*
-	 * Hier werden die Parameter den Feldern der Klasse zugewiesen, somit haben
-	 * beide den gleichen Wert. Da die Parameter und die Felder den gleichen Namen
-	 * haben, werden die Felder mit this bezeichnet, damit eindeutig ist, auf welche
-	 * Variable Bezug genommen wird. (Parameter sind auch nur Variablen).
-	 */
-	this.x = x;
-	this.y = y;
+        /*
+         * Hier werden die Parameter den Feldern der Klasse zugewiesen, somit haben
+         * beide den gleichen Wert. Da die Parameter und die Felder den gleichen Namen
+         * haben, werden die Felder mit this bezeichnet, damit eindeutig ist, auf welche
+         * Variable Bezug genommen wird. (Parameter sind auch nur Variablen).
+         */
+        this.x = x;
+        this.y = y;
     }
 
     /*
@@ -90,7 +91,7 @@ public class Dreieck implements GeometrischeFigur {
      * diese einem Feld zuordnet.
      */
     public Dreieck(Color fuellFarbe) {
-	this.fuellFarbe = fuellFarbe;
+        this.fuellFarbe = fuellFarbe;
     }
 
     /*
@@ -105,8 +106,8 @@ public class Dreieck implements GeometrischeFigur {
      */
     @Override
     public void setMittelpunkt(Punkt mittelpunkt) {
-	this.x = mittelpunkt.getX();
-	this.y = mittelpunkt.getY();
+        this.x = mittelpunkt.getX();
+        this.y = mittelpunkt.getY();
     }
 
     /*
@@ -114,22 +115,22 @@ public class Dreieck implements GeometrischeFigur {
      */
     @Override
     public Punkt getMittelPunkt() {
-	return new Punkt(x, y);
+        return new Punkt(x, y);
     }
 
     @Override
     public void setDurchmesser(int d) {
-	throw new UnsupportedOperationException("Dieses Dreieck braucht keinen Druchmesser");
+        throw new UnsupportedOperationException("Dieses Dreieck braucht keinen Druchmesser");
     }
 
     @Override
     public Color getLinienFarbe() {
-	return linienFarbe;
+        return linienFarbe;
     }
 
     @Override
     public void setLinienFarbe(Color farbe) {
-	this.linienFarbe = farbe;
+        this.linienFarbe = farbe;
     }
 
     /*
@@ -140,17 +141,17 @@ public class Dreieck implements GeometrischeFigur {
     @Override
     public void zeichnen(Graphics graphics) {
 
-	// Waehlen, mit welcher Farbe gezeichnet werden soll
-	graphics.setColor(linienFarbe);
+        // Waehlen, mit welcher Farbe gezeichnet werden soll
+        graphics.setColor(linienFarbe);
 
-	// vom Mittelpunkt nach rechts zeichnen
-	graphics.drawLine(x, y, x, y + KANTEN_LAENGE);
+        // vom Mittelpunkt nach rechts zeichnen
+        graphics.drawLine(x, y, x, y + KANTEN_LAENGE);
 
-	// vom Ende der vorherigen Linie nach oben zeichnen
-	graphics.drawLine(x, y + KANTEN_LAENGE, x - KANTEN_LAENGE, y + KANTEN_LAENGE);
+        // vom Ende der vorherigen Linie nach oben zeichnen
+        graphics.drawLine(x, y + KANTEN_LAENGE, x - KANTEN_LAENGE, y + KANTEN_LAENGE);
 
-	// vom Ende der vorherigen Linie zum Anfang der ersten Linie zeichnen
-	graphics.drawLine(x - KANTEN_LAENGE, y + KANTEN_LAENGE, x, y);
+        // vom Ende der vorherigen Linie zum Anfang der ersten Linie zeichnen
+        graphics.drawLine(x - KANTEN_LAENGE, y + KANTEN_LAENGE, x, y);
     }
 
     /*
@@ -165,21 +166,21 @@ public class Dreieck implements GeometrischeFigur {
      * Ein Getter fuer die Farbe, die zum Fuellen verwendet wird.
      */
     public Color getFuellFarbe() {
-	return fuellFarbe;
+        return fuellFarbe;
     }
 
     /*
      * Ein Setter fuer die Farbe, die zum Fuellen verwendet wird.
      */
     public void setFuellFarbe(Color fuellFarbe) {
-	this.fuellFarbe = fuellFarbe;
+        this.fuellFarbe = fuellFarbe;
     }
 
     public int getX() {
-	return x;
+        return x;
     }
 
     public int getY() {
-	return y;
+        return y;
     }
 }

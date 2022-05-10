@@ -1,6 +1,5 @@
 package com.hoffrogge.lehreinheiten.lehreinheit05;
 
-import com.hoffrogge.lehreinheiten.lehreinheit04.Rechteck;
 import junit.framework.TestCase;
 
 public class RechteckTest extends TestCase {

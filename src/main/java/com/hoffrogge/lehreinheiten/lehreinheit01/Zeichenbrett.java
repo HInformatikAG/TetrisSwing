@@ -1,6 +1,6 @@
 package com.hoffrogge.lehreinheiten.lehreinheit01;
 
-import com.hoffrogge.lehreinheiten.lehreinheit04.GeometrischeFigur;
+import com.hoffrogge.lehreinheiten.lehreinheit05.GeometrischeFigur;
 
 import javax.swing.*;
 import java.awt.*;

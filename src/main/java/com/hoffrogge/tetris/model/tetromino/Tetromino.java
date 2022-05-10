@@ -1,12 +1,11 @@
 package com.hoffrogge.tetris.model.tetromino;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.hoffrogge.tetris.model.Punkt;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Tetromino implements TetrominoSpielstein {
 

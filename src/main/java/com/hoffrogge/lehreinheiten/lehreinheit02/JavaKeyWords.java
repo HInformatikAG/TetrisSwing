@@ -1,7 +1,7 @@
 package com.hoffrogge.lehreinheiten.lehreinheit02;
 
-import com.hoffrogge.lehreinheiten.lehreinheit04.GeometrischeFigur;
-import com.hoffrogge.lehreinheiten.lehreinheit04.Quadrat;
+import com.hoffrogge.lehreinheiten.lehreinheit05.GeometrischeFigur;
+import com.hoffrogge.lehreinheiten.lehreinheit05.Quadrat;
 
 import java.util.ArrayList;
 import java.util.List;
