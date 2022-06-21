@@ -13,7 +13,7 @@ public abstract class Tetromino implements TetrominoSpielstein {
 
 	protected int durchmesser;
 
-	protected List<TeilBlock> teilBloecke = new ArrayList<>(4);
+	protected List<TetrominoSpielstein> teilBloecke = new ArrayList<>(4);
 
 	@Override
 	public int getX() {
@@ -302,7 +302,7 @@ public abstract class Tetromino implements TetrominoSpielstein {
 	}
 
 	@Override
-	public List<TeilBlock> getTeilBloecke() {
+	public List<TetrominoSpielstein> getTeilBloecke() {
 		return teilBloecke;
 	}
 
@@ -314,7 +314,7 @@ public abstract class Tetromino implements TetrominoSpielstein {
 		 * Spielsteine gleich, wenn jeder der vier TeilBloecke seinem Pendant im anderen
 		 * Tetromino gleicht.
 		 */
-		List<TeilBlock> andereTeilBloecke = andererSpielstein.getTeilBloecke();
+		List<TetrominoSpielstein> andereTeilBloecke = andererSpielstein.getTeilBloecke();
 
 		/* Es muss jeweils genau vier geben! */
 		if (teilBloecke.size() != 4 || andereTeilBloecke.size() != 4)

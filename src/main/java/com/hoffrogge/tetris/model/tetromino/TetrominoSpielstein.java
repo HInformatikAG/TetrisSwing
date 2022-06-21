@@ -41,9 +41,9 @@ public interface TetrominoSpielstein extends Comparable<TetrominoSpielstein> {
 
     /**
      * Jeder TetrominoSpielstein ist aus bis zu vier einzelnen, quadratischen
-     * Blöcken aufgebaut.
+     * Blöcken aufgebaut. Diese Quadrate gelten für das Spiel trotzdem noch als gültiger Spielstein.
      */
-    List<TeilBlock> getTeilBloecke();
+    List<TetrominoSpielstein> getTeilBloecke();
 
     Color getFuellFarbe();
 

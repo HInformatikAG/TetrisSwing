@@ -1,34 +1,24 @@
 package com.hoffrogge.tetris.logik;
 
-import java.awt.Color;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.TetrisMusikSpieler;
-import com.hoffrogge.tetris.model.tetromino.TeilBlock;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
 import com.hoffrogge.tetris.view.Spielfeld;
 import com.hoffrogge.tetris.view.Spielfenster;
+
+import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.*;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Spiel implements Runnable {
 
@@ -56,7 +46,7 @@ public class Spiel implements Runnable {
     private TetrominoTyp naechsterSpielsteinTyp;
     private TetrominoSpielstein naechsterSpielstein;
     private TetrominoSpielstein fallenderSpielstein;
-    private List<TeilBlock> gefalleneSteine;
+    private List<TetrominoSpielstein> gefalleneSteine;
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
@@ -130,7 +120,7 @@ public class Spiel implements Runnable {
 	return fallenderSpielstein;
     }
 
-    public List<TeilBlock> getGefalleneSteine() {
+    public List<TetrominoSpielstein> getGefalleneSteine() {
 	return gefalleneSteine;
     }
 
@@ -193,7 +183,7 @@ public class Spiel implements Runnable {
 
 	    if (hatFallenderSteinBodenErreicht() || faelltFallenderSteinAufAnderenStein()) {
 
-		List<TeilBlock> teilBloecke = fallenderSpielstein.getTeilBloecke();
+		List<TetrominoSpielstein> teilBloecke = fallenderSpielstein.getTeilBloecke();
 
 		if (teilBloecke != null)
 		    getGefalleneSteine().addAll(teilBloecke);
@@ -266,18 +256,18 @@ public class Spiel implements Runnable {
 	return getFallenderSpielstein().getTiefstesY() >= TetrisKonstanten.SPIELFELD_HOEHE;
     }
 
-    private void loescheReihe(List<TeilBlock> blockListe) {
+    private void loescheReihe(List<TetrominoSpielstein> blockListe) {
 
 	int hoehe = 0;
 
-	for (TeilBlock block : blockListe) {
+	for (TetrominoSpielstein block : blockListe) {
 
 	    block.setFuellFarbe(new Color(255, 60, 255));
 	    getGefalleneSteine().remove(block);
 	    hoehe = block.getY();
 	}
 
-	for (TeilBlock block : getGefalleneSteine())
+	for (TetrominoSpielstein block : getGefalleneSteine())
 	    if (block.getY() < hoehe)
 		block.bewegeNachUnten();
 
@@ -289,11 +279,11 @@ public class Spiel implements Runnable {
 	Collections.sort(getGefalleneSteine());
 
 	/* Integer ist Y-Koordinate */
-	Map<Integer, List<TeilBlock>> bloeckeProReihe = new HashMap<>();
+	Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
 
-	for (TeilBlock block : getGefalleneSteine()) {
+	for (TetrominoSpielstein block : getGefalleneSteine()) {
 
-	    List<TeilBlock> blockListe = bloeckeProReihe.get(block.getY());
+	    List<TetrominoSpielstein> blockListe = bloeckeProReihe.get(block.getY());
 
 	    if (blockListe == null)
 		blockListe = new ArrayList<>();
@@ -303,9 +293,9 @@ public class Spiel implements Runnable {
 	    bloeckeProReihe.put(block.getY(), blockListe);
 	}
 
-	for (Entry<Integer, List<TeilBlock>> reihe : bloeckeProReihe.entrySet()) {
+	for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
 
-	    List<TeilBlock> blockListe = reihe.getValue();
+	    List<TetrominoSpielstein> blockListe = reihe.getValue();
 
 	    if (blockListe.size() == TetrisKonstanten.SPIELFELD_BREITE / TetrisKonstanten.BLOCK_BREITE)
 		loescheReihe(blockListe);

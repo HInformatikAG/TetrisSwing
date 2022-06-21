@@ -1,11 +1,10 @@
 package com.hoffrogge.tetris.model.tetromino;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import com.hoffrogge.tetris.model.TetrisKonstanten;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Random;
-
-import com.hoffrogge.tetris.model.TetrisKonstanten;
 
 public class TeilBlock implements TetrominoSpielstein {
 
@@ -159,7 +158,7 @@ public class TeilBlock implements TetrominoSpielstein {
     }
 
     @Override
-    public List<TeilBlock> getTeilBloecke() {
+    public List<TetrominoSpielstein> getTeilBloecke() {
 	throw new IllegalStateException("Ein Teilblock darf nicht mehr aufgeteilt werden!");
     }
 }
