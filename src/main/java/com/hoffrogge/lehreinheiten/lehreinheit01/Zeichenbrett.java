@@ -10,7 +10,7 @@ import java.text.MessageFormat;
 
 /*
  * Zeichenfläche mit einer Größe von 800 x 800 Pixeln
- *  0,0 ----------------------------------------- 800,0
+ *  0,0 ----------------------------------------- 600,0
  *  |                                               |
  *  |                                               |
  *  |                                               |
@@ -28,7 +28,7 @@ import java.text.MessageFormat;
  *  |                                               |
  *  |                                               |
  *  |                                               |
- *  0,800 --------------------------------------- 800,800
+ *  0,600 --------------------------------------- 600,600
  */
 
 /**
@@ -42,7 +42,7 @@ import java.text.MessageFormat;
 @SuppressWarnings("serial")
 public class Zeichenbrett extends JPanel {
 
-    private static final int KANTEN_LAENGE = 800;
+    private static final int KANTEN_LAENGE = 600;
 
     private BufferedImage zeichenflaeche;
 
@@ -73,7 +73,7 @@ public class Zeichenbrett extends JPanel {
         fensterInhalt.add(this, BorderLayout.CENTER);
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        fenster.setSize(new Dimension(KANTEN_LAENGE + 20, KANTEN_LAENGE + 43));
+        fenster.setSize(new Dimension(KANTEN_LAENGE, KANTEN_LAENGE));
 
         /*
          * Kleiner Trick, um das Fenster in der Mitte des Bildschirms anzuzeigen

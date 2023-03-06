@@ -3,7 +3,7 @@ package com.hoffrogge.lehreinheiten.lehreinheit01;
 /*
  * Zeichenfläche mit einer Größe von 800 x 800 Pixeln
  *
- *  0,0 ----------------------------------------- 800,0
+ *  0,0 ----------------------------------------- 600,0
  *  |                                               |
  *  |                                               |
  *  |                                               |
@@ -21,7 +21,7 @@ package com.hoffrogge.lehreinheiten.lehreinheit01;
  *  |                                               |
  *  |                                               |
  *  |                                               |
- *  0,800 --------------------------------------- 800,800
+ *  0,600 --------------------------------------- 600,600
  */
 public class Main {
 
@@ -30,7 +30,7 @@ public class Main {
         /*
          * =====================================================================
          *
-         * Dieses Zeichenbrett hat eine Länge und Breite von 800.
+         * Dieses Zeichenbrett hat eine Länge und Breite von 600.
          *
          * AUFGABE: Schaue dir die Beispiele an und zeichne selbst ein paar Linien.
          * Schaffst du es, einen Tetrisspielstein zu zeichnen?
@@ -40,9 +40,9 @@ public class Main {
         Zeichenbrett zeichenbrett = new Zeichenbrett();
 
         /* vier Linien, die ein Rechteck ergeben */
-        zeichenbrett.zeichneLinie(50, 750, 200, 750);
-        zeichenbrett.zeichneLinie(200, 750, 200, 650);
-        zeichenbrett.zeichneLinie(200, 650, 50, 650);
-        zeichenbrett.zeichneLinie(50, 650, 50, 750);
+        zeichenbrett.zeichneLinie(50, 350, 200, 350);
+        zeichenbrett.zeichneLinie(200, 350, 200, 450);
+        zeichenbrett.zeichneLinie(200, 450, 50, 450);
+        zeichenbrett.zeichneLinie(50, 450, 50, 350);
     }
 }
