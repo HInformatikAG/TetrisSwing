@@ -20,7 +20,7 @@ public class Main {
 	 * =========================================================================
 	 * Diese Factory ist dafür zustaendig, Spielsteine zu generieren.
 	 *
-	 * AUFGABE: Implementiere deine eigene Factory.
+	 * AUFGABE: Vervollstaendige die JavaAGTetrominoFactory.
 	 * =========================================================================
 	 */
 	TetrominoFactory tetrominoFactory = new JavaAGTetrominoFactory();
@@ -32,7 +32,7 @@ public class Main {
 	 * Spiel weiter. Ohne den KeyListener laeuft das Spiel, aber der Spieler kann
 	 * nichts machen.
 	 *
-	 * AUFGABE: Implementiere deinen eigenen KeyListener.
+	 * AUFGABE: Vervollstaendige den JavaAGTetrisKeyListener.
 	 * =========================================================================
 	 */
 	KeyListener tetrisKeyListener = new JavaAGTetrisKeyListener();

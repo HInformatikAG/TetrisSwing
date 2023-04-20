@@ -1,5 +1,6 @@
 package com.hoffrogge.tetris.java_ag;
 
+import com.hoffrogge.tetris.java_ag.tetromino.DummySpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 import com.hoffrogge.tetris.model.tetromino.TetrominoTyp;
@@ -20,28 +21,30 @@ public class JavaAGTetrominoFactory implements TetrominoFactory {
     @Override
     public TetrominoTyp erstelleZufaelligenTetrominoTyp() {
 
-	/*
-	 * =============================================================================
-	 * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteintypen
-	 * auswaehlen und zurueckgeben. Noch nicht den fertigen Spielstein (siehe Klasse
-	 * "TetrominoSpielstein"), sondern nur den Typen, siehe Klasse "TetrominoTyp".
-	 * =============================================================================
-	 */
+        /*
+         * =============================================================================
+         * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteintypen
+         * zufaellig auswaehlen und zurueckgeben. Noch nicht den fertigen Spielstein (siehe Klasse
+         * "TetrominoSpielstein"), sondern nur den Typen, siehe Klasse "TetrominoTyp".
+         * Der zufaellige Typ soll dann den festen Typ ersetzen, der aktuell hier returned wird.
+         * =============================================================================
+         */
 
-	return null;
+        return TetrominoTyp.BLOCK;
     }
 
     @Override
     public TetrominoSpielstein erstelleTetromino(TetrominoTyp tetrominoTyp) {
 
-	/*
-	 * =============================================================================
-	 * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteine erstellen
-	 * und zwar einen Spielstein, der zum Typ der Variablen "tetrominoTyp" passt,
-	 * die als Parameter vorgegeben ist.
-	 * =============================================================================
-	 */
+        /*
+         * =============================================================================
+         * AUFGABE: Diese Methode soll einen der sieben moeglichen Spielsteine erstellen
+         * und zwar einen Spielstein, der zum Typ der Variablen "tetrominoTyp" passt,
+         * die als Parameter vorgegeben ist.
+         * Dieser Spielstein soll dann statt des DummySpielsteins returned werden.
+         * =============================================================================
+         */
 
-	return null;
+        return new DummySpielstein();
     }
 }
