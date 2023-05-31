@@ -8,6 +8,7 @@ public class TetrisKonstanten {
 	}
 
 	public static final boolean MUSIK_AN = false;
+	public static final boolean KOORDINATEN_AUS = true;
 
 	public static final int BLOCK_BREITE = 40;
 
