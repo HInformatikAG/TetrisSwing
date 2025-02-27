@@ -1,9 +1,15 @@
 package com.hoffrogge.lehreinheiten.lehreinheit01;
 
-import com.hoffrogge.lehreinheiten.lehreinheit05.GeometrischeFigur;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -33,13 +39,9 @@ import java.text.MessageFormat;
 
 /**
  * Zeichenfläche mit einer Größe von 800 x 800 Pixeln. <br />
- * Zeichnen mit
- * {@link Zeichenbrett#zeichneGeometrischeFigur(GeometrischeFigur zeichenbaresObjekt)}<br
- * />
  * Zeichnen einer Linie ist möglich mit
  * {@link Zeichenbrett#zeichneLinie(int, int, int, int)}<br />
  */
-@SuppressWarnings("serial")
 public class Zeichenbrett extends JPanel {
 
     private static final int KANTEN_LAENGE = 600;
@@ -88,18 +90,6 @@ public class Zeichenbrett extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(zeichenflaeche, 2, 2, this);
-    }
-
-    /**
-     * Zeichnet eine {@link GeometrischeFigur}
-     */
-    public void zeichneGeometrischeFigur(GeometrischeFigur geometrischeFigur) {
-
-        Graphics g2d = zeichenflaeche.getGraphics();
-
-        geometrischeFigur.zeichnen(g2d);
-
-        g2d.dispose();
     }
 
     /**
