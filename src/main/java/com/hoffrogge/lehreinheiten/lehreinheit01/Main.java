@@ -1,7 +1,7 @@
 package com.hoffrogge.lehreinheiten.lehreinheit01;
 
 /*
- * Zeichenfläche mit einer Größe von 800 x 800 Pixeln
+ * Zeichenfläche mit einer Größe von 600 x 600 Pixeln
  *
  *  0,0 ----------------------------------------- 600,0
  *  |                                               |
