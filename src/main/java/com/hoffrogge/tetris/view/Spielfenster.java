@@ -1,15 +1,10 @@
 package com.hoffrogge.tetris.view;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.net.URL;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 import com.hoffrogge.tetris.model.TetrisKonstanten;
+
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
 
 @SuppressWarnings("serial")
 public class Spielfenster extends JFrame {
@@ -125,6 +120,7 @@ public class Spielfenster extends JFrame {
 
 		setVisible(true);
 
+		//TODO das hier sollte doch eher in den entsprechenden Klassen geschehen und nicht an dieser Stelle hier?
 		spielfeld.createBufferStrategy(2);
 		vorschau.createBufferStrategy(2);
 	}
