@@ -29,6 +29,7 @@ public class Spielfeld extends Canvas {
 
     public void zeichnen() {
 
+        //TODO pruefen, warum hier nicht der Standardweg mit @Override paint genutzt wurde, dann aendern oder kommentieren, warum keine Aenderung gemacht wird
         Graphics g = null;
 
         try {
