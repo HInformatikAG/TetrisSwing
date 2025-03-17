@@ -52,101 +52,101 @@ public class Spiel implements Runnable {
 
     public Spiel(TetrominoFactory tetrominoFactory, Spielfeld spielfeld, Spielfenster spielfenster) {
 
-	this.tetrominoFactory = tetrominoFactory;
-	this.spielfeld = spielfeld;
-	this.spielfenster = spielfenster;
+        this.tetrominoFactory = tetrominoFactory;
+        this.spielfeld = spielfeld;
+        this.spielfenster = spielfenster;
 
-	this.gefalleneSteine = new CopyOnWriteArrayList<>();
+        this.gefalleneSteine = new CopyOnWriteArrayList<>();
 
-	this.spielfeld.setSpiel(this);
-	this.spielLaeuft = true;
+        this.spielfeld.setSpiel(this);
+        this.spielLaeuft = true;
     }
 
     public void starteSpiel() {
 
-	highscoreLaden();
+        highscoreLaden();
 
-	naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
+        naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
 
-	spielThread = new Thread(this);
-	spielThread.start();
+        spielThread = new Thread(this);
+        spielThread.start();
 
-	if (TetrisKonstanten.MUSIK_AN) {
+        if (TetrisKonstanten.MUSIK_AN) {
 
-	    soundThread = new Thread(new TetrisMusikSpieler());
-	    soundThread.start();
-	}
+            soundThread = new Thread(new TetrisMusikSpieler());
+            soundThread.start();
+        }
     }
 
     @Override
     public void run() {
 
-	while (spielLaeuft) {
+        while (spielLaeuft) {
 
-	    aktualisierePunkteUndLevelUndReihen();
+            aktualisierePunkteUndLevelUndReihen();
 
-	    if (!isPause())
-		aktualisiereSpiel();
+            if (!isPause())
+                aktualisiereSpiel();
 
-	    zeichneSpielfeld();
+            zeichneSpielfeld();
 
-	    if (istSpielfeldVoll()) {
+            if (istSpielfeldVoll()) {
 
-		beendeSpiel();
-		continue;
-	    }
+                beendeSpiel();
+                continue;
+            }
 
-	    try {
+            try {
 
-		int spielBeschleuniger = (level - 1) * 50;
+                int spielBeschleuniger = (level - 1) * 50;
 
-		int spielGeschwindigkeit = Math.max(TetrisKonstanten.SPIEL_GESCHWINDIGKEIT - spielBeschleuniger,
-			TetrisKonstanten.SPIEL_GESCHWINDIGKEIT_MIN);
+                int spielGeschwindigkeit = Math.max(TetrisKonstanten.SPIEL_GESCHWINDIGKEIT - spielBeschleuniger,
+                        TetrisKonstanten.SPIEL_GESCHWINDIGKEIT_MIN);
 
-		Thread.sleep(spielGeschwindigkeit);
+                Thread.sleep(spielGeschwindigkeit);
 
-	    } catch (InterruptedException e) {
-		Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-		Thread.currentThread().interrupt();
-	    }
-	}
+            } catch (InterruptedException e) {
+                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     public void aktualisiereSpielfeld() {
-	aktualisiereSpiel();
+        aktualisiereSpiel();
     }
 
     public TetrominoSpielstein getFallenderSpielstein() {
-	return fallenderSpielstein;
+        return fallenderSpielstein;
     }
 
     public List<TetrominoSpielstein> getGefalleneSteine() {
-	return gefalleneSteine;
+        return gefalleneSteine;
     }
 
     public boolean isBeschleunigterFall() {
-	return isBeschleunigterFall;
+        return isBeschleunigterFall;
     }
 
     public void setBeschleunigterFall(boolean isBeschleunigterFall) {
-	this.isBeschleunigterFall = isBeschleunigterFall;
+        this.isBeschleunigterFall = isBeschleunigterFall;
     }
 
     public boolean isPause() {
-	return isPause;
+        return isPause;
     }
 
     public void togglePause() {
-	isPause = !isPause;
+        isPause = !isPause;
     }
 
     public boolean istSpielfeldVoll() {
 
-	for (TetrominoSpielstein gefallenerStein : getGefalleneSteine())
-	    if (gefallenerStein.getHoechstesY() <= TetrisKonstanten.SPIELFELD_X0)
-		return true;
+        for (TetrominoSpielstein gefallenerStein : getGefalleneSteine())
+            if (gefallenerStein.getHoechstesY() <= TetrisKonstanten.SPIELFELD_X0)
+                return true;
 
-	return false;
+        return false;
     }
 
     /**
@@ -154,226 +154,226 @@ public class Spiel implements Runnable {
      * anderer Stein oder eine Wand im Weg ist.
      */
     public boolean passtGedrehterSpielstein(TetrominoSpielstein spielstein) {
-	// TODO falls kein Teilnehmer der Java AG es schafft
-	/*
-	 * =============================================================================
-	 * EXTRAAUFGABE: Implementiere diese Methode.
-	 * =============================================================================
-	 */
-	return true;
+        // TODO falls kein Teilnehmer der Java AG es schafft
+        /*
+         * =============================================================================
+         * EXTRAAUFGABE: Implementiere diese Methode.
+         * =============================================================================
+         */
+        return true;
     }
 
     public void zeichneSpielfeld() {
-	spielfeld.zeichnen();
+        spielfeld.zeichnen();
     }
 
     private void aktualisiereSpiel() {
 
-	loescheVolleReihen();
+        loescheVolleReihen();
 
-	if (fallenderSpielstein == null) {
+        if (fallenderSpielstein == null) {
 
-	    fallenderSpielstein = naechsterSpielstein;
-	    naechsterSpielstein = neuerZufaelligerSpielstein();
-	}
+            fallenderSpielstein = naechsterSpielstein;
+            naechsterSpielstein = neuerZufaelligerSpielstein();
+        }
 
-	if (fallenderSpielstein != null) {
+        if (fallenderSpielstein != null) {
 
-	    fallenderSpielstein.bewegeNachUnten();
+            fallenderSpielstein.bewegeNachUnten();
 
-	    if (hatFallenderSteinBodenErreicht() || faelltFallenderSteinAufAnderenStein()) {
+            if (hatFallenderSteinBodenErreicht() || faelltFallenderSteinAufAnderenStein()) {
 
-		List<TetrominoSpielstein> teilBloecke = fallenderSpielstein.getTeilBloecke();
+                List<TetrominoSpielstein> teilBloecke = fallenderSpielstein.getTeilBloecke();
 
-		if (teilBloecke != null)
-		    getGefalleneSteine().addAll(teilBloecke);
+                if (teilBloecke != null)
+                    getGefalleneSteine().addAll(teilBloecke);
 
-		fallenderSpielstein = null;
+                fallenderSpielstein = null;
 
-		erhoehePunkte();
-	    }
-	}
+                erhoehePunkte();
+            }
+        }
     }
 
     private void aktualisierePunkteUndLevelUndReihen() {
 
-	spielfenster.setLevel(String.valueOf(level));
-	spielfenster.setPunkte(String.valueOf(punkte));
-	spielfenster.setReihen(String.valueOf(reihen));
+        spielfenster.setLevel(String.valueOf(level));
+        spielfenster.setPunkte(String.valueOf(punkte));
+        spielfenster.setReihen(String.valueOf(reihen));
 
-	highscore = Math.max(punkte, highscore);
-	spielfenster.setHighscore(String.valueOf(highscore));
+        highscore = Math.max(punkte, highscore);
+        spielfenster.setHighscore(String.valueOf(highscore));
     }
 
     private void erhoehePunkte() {
 
-	if (isBeschleunigterFall())
-	    punkte += level * 3 + 21;
-	else
-	    punkte += level * 3 + 3;
+        if (isBeschleunigterFall())
+            punkte += level * 3 + 21;
+        else
+            punkte += level * 3 + 3;
 
-	pruefeUndSetzeLevel();
+        pruefeUndSetzeLevel();
     }
 
     private void erhoeheReihen() {
-	reihen++;
+        reihen++;
     }
 
     private TetrominoSpielstein neuerZufaelligerSpielstein() {
 
-	TetrominoSpielstein tetromino = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
+        TetrominoSpielstein tetromino = tetrominoFactory.erstelleTetromino(naechsterSpielsteinTyp);
 
-	naechsterSpielsteinTyp = getNeachsterSpielsteinTyp();
+        naechsterSpielsteinTyp = getNeachsterSpielsteinTyp();
 
-	return tetromino;
+        return tetromino;
     }
 
     private TetrominoTyp getNeachsterSpielsteinTyp() {
 
-	TetrominoTyp vorherigerSpielsteinTyp = naechsterSpielsteinTyp;
+        TetrominoTyp vorherigerSpielsteinTyp = naechsterSpielsteinTyp;
 
-	naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
+        naechsterSpielsteinTyp = tetrominoFactory.erstelleZufaelligenTetrominoTyp();
 
-	propertyChangeSupport.firePropertyChange(NAECHSTER_SPIELSTEIN_TYP, vorherigerSpielsteinTyp,
-		naechsterSpielsteinTyp);
+        propertyChangeSupport.firePropertyChange(NAECHSTER_SPIELSTEIN_TYP, vorherigerSpielsteinTyp,
+                naechsterSpielsteinTyp);
 
-	return naechsterSpielsteinTyp;
+        return naechsterSpielsteinTyp;
     }
 
     private boolean faelltFallenderSteinAufAnderenStein() {
 
-	if (getGefalleneSteine().isEmpty())
-	    return false;
+        if (getGefalleneSteine().isEmpty())
+            return false;
 
-	for (TetrominoSpielstein block : getGefalleneSteine())
-	    if (getFallenderSpielstein().faelltAuf(block))
-		return true;
+        for (TetrominoSpielstein block : getGefalleneSteine())
+            if (getFallenderSpielstein().faelltAuf(block))
+                return true;
 
-	return false;
+        return false;
     }
 
     private boolean hatFallenderSteinBodenErreicht() {
-	return getFallenderSpielstein().getTiefstesY() >= TetrisKonstanten.SPIELFELD_HOEHE;
+        return getFallenderSpielstein().getTiefstesY() >= TetrisKonstanten.SPIELFELD_HOEHE;
     }
 
     private void loescheReihe(List<TetrominoSpielstein> blockListe) {
 
-	int hoehe = 0;
+        int hoehe = 0;
 
-	for (TetrominoSpielstein block : blockListe) {
+        for (TetrominoSpielstein block : blockListe) {
 
-	    block.setFuellFarbe(new Color(255, 60, 255));
-	    getGefalleneSteine().remove(block);
-	    hoehe = block.getY();
-	}
+            block.setFuellFarbe(new Color(255, 60, 255));
+            getGefalleneSteine().remove(block);
+            hoehe = block.getY();
+        }
 
-	for (TetrominoSpielstein block : getGefalleneSteine())
-	    if (block.getY() < hoehe)
-		block.bewegeNachUnten();
+        for (TetrominoSpielstein block : getGefalleneSteine())
+            if (block.getY() < hoehe)
+                block.bewegeNachUnten();
 
-	erhoeheReihen();
+        erhoeheReihen();
     }
 
     private void loescheVolleReihen() {
 
-	Collections.sort(getGefalleneSteine());
+        Collections.sort(getGefalleneSteine());
 
-	/* Integer ist Y-Koordinate */
-	Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
+        /* Integer ist Y-Koordinate */
+        Map<Integer, List<TetrominoSpielstein>> bloeckeProReihe = new HashMap<>();
 
-	for (TetrominoSpielstein block : getGefalleneSteine()) {
+        for (TetrominoSpielstein block : getGefalleneSteine()) {
 
-	    List<TetrominoSpielstein> blockListe = bloeckeProReihe.get(block.getY());
+            List<TetrominoSpielstein> blockListe = bloeckeProReihe.get(block.getY());
 
-	    if (blockListe == null)
-		blockListe = new ArrayList<>();
+            if (blockListe == null)
+                blockListe = new ArrayList<>();
 
-	    blockListe.add(block);
+            blockListe.add(block);
 
-	    bloeckeProReihe.put(block.getY(), blockListe);
-	}
+            bloeckeProReihe.put(block.getY(), blockListe);
+        }
 
-	for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
+        for (Entry<Integer, List<TetrominoSpielstein>> reihe : bloeckeProReihe.entrySet()) {
 
-	    List<TetrominoSpielstein> blockListe = reihe.getValue();
+            List<TetrominoSpielstein> blockListe = reihe.getValue();
 
-	    if (blockListe.size() == TetrisKonstanten.SPIELFELD_BREITE / TetrisKonstanten.BLOCK_BREITE)
-		loescheReihe(blockListe);
-	}
+            if (blockListe.size() == TetrisKonstanten.SPIELFELD_BREITE / TetrisKonstanten.BLOCK_BREITE)
+                loescheReihe(blockListe);
+        }
     }
 
     private void pruefeUndSetzeLevel() {
 
-	if (reihen / level >= 10)
-	    level++;
+        if (reihen / level >= 10)
+            level++;
     }
 
     private void highscoreLaden() {
 
-	File highscoreCsv = new File("highscore.csv");
+        File highscoreCsv = new File("highscore.csv");
 
-	if (!highscoreCsv.exists())
-	    return;
+        if (!highscoreCsv.exists())
+            return;
 
-	try (BufferedReader br = new BufferedReader(new FileReader("highscore.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("highscore.csv"))) {
 
-	    String line = br.readLine();
+            String line = br.readLine();
 
-	    highscore = Integer.parseInt(line);
+            highscore = Integer.parseInt(line);
 
-	} catch (FileNotFoundException e) {
-	    Logger.getGlobal().log(Level.WARNING, "Konnte Highscore-Datei nicht finden! " + e.getMessage(), e);
-	    e.printStackTrace();
-	} catch (IOException | NumberFormatException e) {
-	    Logger.getGlobal().log(Level.WARNING, "Konnte Highscore nicht lesen! " + e.getMessage(), e);
-	    e.printStackTrace();
-	}
+        } catch (FileNotFoundException e) {
+            Logger.getGlobal().log(Level.WARNING, "Konnte Highscore-Datei nicht finden! " + e.getMessage(), e);
+            e.printStackTrace();
+        } catch (IOException | NumberFormatException e) {
+            Logger.getGlobal().log(Level.WARNING, "Konnte Highscore nicht lesen! " + e.getMessage(), e);
+            e.printStackTrace();
+        }
     }
 
     private void highscoreSpeichern() {
 
-	File highscoreCsv = new File("highscore.csv");
+        File highscoreCsv = new File("highscore.csv");
 
-	if (!highscoreCsv.exists())
-	    try {
-		highscoreCsv.createNewFile();
-	    } catch (IOException e) {
-		Logger.getGlobal().log(Level.WARNING, "Highscore-Datei konnte nicht angelegt werden! " + e.getMessage(),
-			e);
-		e.printStackTrace();
-	    }
+        if (!highscoreCsv.exists())
+            try {
+                highscoreCsv.createNewFile();
+            } catch (IOException e) {
+                Logger.getGlobal().log(Level.WARNING, "Highscore-Datei konnte nicht angelegt werden! " + e.getMessage(),
+                        e);
+                e.printStackTrace();
+            }
 
-	try (BufferedWriter bw = new BufferedWriter(new FileWriter("highscore.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("highscore.csv"))) {
 
-	    int aktuellerHighscore = Math.max(punkte, highscore);
-	    String content = String.valueOf(aktuellerHighscore);
+            int aktuellerHighscore = Math.max(punkte, highscore);
+            String content = String.valueOf(aktuellerHighscore);
 
-	    bw.write(content);
+            bw.write(content);
 
-	} catch (IOException e) {
-	    Logger.getGlobal().log(Level.WARNING, "Konnte Highscore nicht speichern! " + e.getMessage(), e);
-	    e.printStackTrace();
-	}
+        } catch (IOException e) {
+            Logger.getGlobal().log(Level.WARNING, "Konnte Highscore nicht speichern! " + e.getMessage(), e);
+            e.printStackTrace();
+        }
     }
 
     private void beendeSpiel() {
 
-	spielLaeuft = false;
+        spielLaeuft = false;
 
-	try {
+        try {
 
-	    if (TetrisKonstanten.MUSIK_AN)
-		soundThread.join();
+            if (TetrisKonstanten.MUSIK_AN)
+                soundThread.join();
 
-	} catch (InterruptedException e) {
-	    Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
-	    Thread.currentThread().interrupt();
-	}
+        } catch (InterruptedException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
+            Thread.currentThread().interrupt();
+        }
 
-	highscoreSpeichern();
+        highscoreSpeichern();
     }
 
     public void addObserver(PropertyChangeListener observer) {
-	propertyChangeSupport.addPropertyChangeListener(observer);
+        propertyChangeSupport.addPropertyChangeListener(observer);
     }
 }
