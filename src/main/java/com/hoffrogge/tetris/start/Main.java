@@ -64,11 +64,12 @@ public class Main {
 	 */
 	KeyListener tetrisKeyListener = new TetrisKeyListener(spiel);
 
-	/*
-	 * Der KeyListener muss an einer Komponente hängen, die angezeigt wird, in
-	 * diesem Fall eignet sich das Spielfenster dafür.
-	 */
-	spielfenster.addKeyListener(tetrisKeyListener);
+        /*
+         * Der KeyListener muss an einer Komponente haengen, die angezeigt wird, in
+         * diesem Fall eignet sich das Spielfeld dafür.
+         */
+        spielfeld.addKeyListener(tetrisKeyListener);
+        spielfeld.requestFocusInWindow();
 
 	spiel.starteSpiel();
     }

@@ -69,11 +69,12 @@ public class Main {
 	 */
 	spiel.addObserver(vorschau);
 
-	/*
-	 * Der KeyListener muss an einer Komponente haengen, die angezeigt wird, in
-	 * diesem Fall eignet sich das Spielfenster dafuer.
-	 */
-	spielfenster.addKeyListener(tetrisKeyListener);
+        /*
+         * Der KeyListener muss an einer Komponente haengen, die angezeigt wird, in
+         * diesem Fall eignet sich das Spielfeld dafür.
+         */
+        spielfeld.addKeyListener(tetrisKeyListener);
+        spielfeld.requestFocusInWindow();
 
 	/* Das Spiel wird gestartet. */
 	spiel.starteSpiel();
