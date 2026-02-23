@@ -1,0 +1,2 @@
+# Aufgabe für Praktikanten
+Im Package (Ordner) java_praktikanten gibt es die Klassen (Dateien) Main, PraktikantenSpielstein und PraktikantenTetrominioFactory. Schau dir die Klasse Main und die Klasse PraktikantenSpielstein an. Die Klasse Main dient dazu, das Tetrisspiel zu starten. Die Klasse PraktikantenSpielstein sollst du so erweitern, dass ein richtiger Tetrisspielstein gezeichnet wird.
