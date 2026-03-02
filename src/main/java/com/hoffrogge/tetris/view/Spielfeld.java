@@ -4,7 +4,13 @@ import com.hoffrogge.tetris.logik.Spiel;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.text.MessageFormat;
 
 public class Spielfeld extends Canvas {
