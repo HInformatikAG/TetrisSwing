@@ -27,7 +27,7 @@ public class Spielfeld extends Canvas {
 
     public void zeichnen() {
 
-        //TODO pruefen, warum hier nicht der Standardweg mit @Override paint genutzt wurde, dann aendern oder kommentieren, warum keine Aenderung gemacht wird
+        //@Override public void paint(Graphics g) funktioniert nicht gut, weil das Zeichnen dann flackert, deshalb wird Graphics ueber die BufferStrategy geladen
         Graphics g = null;
 
         try {
