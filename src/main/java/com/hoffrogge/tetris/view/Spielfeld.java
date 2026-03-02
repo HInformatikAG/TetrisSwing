@@ -43,7 +43,7 @@ public class Spielfeld extends Canvas {
                 TetrominoSpielstein fallenderSpielstein = spiel.getFallenderSpielstein();
 
                 if (fallenderSpielstein != null)
-                    zeichenFallendenSpielstein(g, fallenderSpielstein);
+                    zeichneFallendenSpielstein(g, fallenderSpielstein);
 
                 for (TetrominoSpielstein gefallenerStein : spiel.getGefalleneSteine())
                     gefallenerStein.zeichnen(g);
@@ -62,7 +62,7 @@ public class Spielfeld extends Canvas {
         }
     }
 
-    private static void zeichenFallendenSpielstein(Graphics g, TetrominoSpielstein fallenderSpielstein) {
+    private static void zeichneFallendenSpielstein(Graphics g, TetrominoSpielstein fallenderSpielstein) {
 
         fallenderSpielstein.zeichnen(g);
 
@@ -114,13 +114,18 @@ public class Spielfeld extends Canvas {
         Color backupColor = g.getColor();
         g.setColor(Color.BLACK);
 
-        g.drawString("x=0, y=0", 2, 12);
-        g.drawString("x=400, y=800", 324, 796);
+        String koordinatenObenLinks = String.format("x=%d, y=%d", TetrisKonstanten.SPIELFELD_X0, TetrisKonstanten.SPIELFELD_Y0);
+        String koordinatenUntenRechts = String.format("x=%d, y=%d", TetrisKonstanten.SPIELFELD_BREITE, TetrisKonstanten.SPIELFELD_HOEHE);
+
+        int stringWidth = getFontMetrics(getFont()).stringWidth(koordinatenUntenRechts);
+        int offset = 10;
+        g.drawString(koordinatenObenLinks, TetrisKonstanten.SPIELFELD_X0+offset, TetrisKonstanten.SPIELFELD_Y0+offset);
+        g.drawString(koordinatenUntenRechts, TetrisKonstanten.SPIELFELD_BREITE-stringWidth-offset, TetrisKonstanten.SPIELFELD_HOEHE-offset);
 
         g.setColor(backupColor);
     }
 
-    private void zeichenHilfslinien(Graphics g) {
+    private static void zeichenHilfslinien(Graphics g) {
 
         if (TetrisKonstanten.KOORDINATEN_AUS)
             return;

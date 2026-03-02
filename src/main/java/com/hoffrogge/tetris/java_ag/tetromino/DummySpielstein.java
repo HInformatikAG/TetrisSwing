@@ -1,5 +1,6 @@
 package com.hoffrogge.tetris.java_ag.tetromino;
 
+import com.hoffrogge.tetris.model.TetrisKonstanten;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 
 import java.awt.*;
@@ -12,8 +13,8 @@ public class DummySpielstein implements TetrominoSpielstein {
     private int y;
 
     public DummySpielstein() {
-        this.x = 120;
-        this.y = 100;
+        this.x = TetrisKonstanten.SPIELFELD_BREITE / 2;
+        this.y = TetrisKonstanten.FENSTER_HOEHE / TetrisKonstanten.BLOCK_BREITE;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class DummySpielstein implements TetrominoSpielstein {
 
     @Override
     public void setY(int y) {
-        this.y=y;
+        this.y = y;
     }
 
     @Override
@@ -111,7 +112,7 @@ public class DummySpielstein implements TetrominoSpielstein {
 
         graphics.setColor(getFuellFarbe());
 
-        graphics.drawString("Ich bin nur ein Platzhalter ;)", x, y);
+        graphics.drawString("Ich bin nur ein Platzhalter ;)", x, y + 10);
     }
 
     @Override
