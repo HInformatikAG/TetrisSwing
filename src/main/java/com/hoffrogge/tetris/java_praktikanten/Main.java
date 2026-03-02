@@ -13,55 +13,55 @@ public class Main {
 
     public static void main(String[] args) {
 
-	/*
-	 * =========================================================================
-	 * Diese Factory ist dafür zuständig, Spielsteine zu generieren. Mit deiner
-	 * eigenen Factory kannst du hier deine eigenen Spielsteine einbauen.
-	 * =========================================================================
-	 */
-	TetrominoFactory tetrominoFactory = new PraktikantenTetrominoFactory();
+        /*
+         * =========================================================================
+         * Diese Factory ist dafür zuständig, Spielsteine zu generieren. Mit deiner
+         * eigenen Factory kannst du hier deine eigenen Spielsteine einbauen.
+         * =========================================================================
+         */
+        TetrominoFactory tetrominoFactory = new PraktikantenTetrominoFactory();
 
-	/*
-	 * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die Spielsteine. Das
-	 * Spielfeld kann Tetrisspielsteine nicht beeinflussen.
-	 */
-	Spielfeld spielfeld = new Spielfeld(tetrominoFactory);
+        /*
+         * Dies ist das Spielfeld. Es zeichnet das Spielfeld und die Spielsteine. Das
+         * Spielfeld kann Tetrisspielsteine nicht beeinflussen.
+         */
+        Spielfeld spielfeld = new Spielfeld();
 
-	/*
-	 * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie nicht
-	 * tun.
-	 */
-	Vorschau vorschau = new Vorschau();
+        /*
+         * Die Vorschau zeigt den jeweils nächsten Spielstein an. Mehr kann sie nicht
+         * tun.
+         */
+        Vorschau vorschau = new Vorschau();
 
-	/*
-	 * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore, Level,
-	 * Punkte und Reihen. Das Spielfenster kann Spielsteine nicht beeinflussen.
-	 */
-	Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
+        /*
+         * Das Spielfenster zeichnet das Spielfeld, die Vorschau, Highscore, Level,
+         * Punkte und Reihen. Das Spielfenster kann Spielsteine nicht beeinflussen.
+         */
+        Spielfenster spielfenster = new Spielfenster(spielfeld, vorschau);
 
-	/*
-	 * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen von
-	 * Spielsteinen oder die Berechnung von Punkten. Das Spiel kann nichts
-	 * darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur dem Spielfeld
-	 * Informationen geben, die das Spielfeld dann darstellt.
-	 */
-	Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster);
+        /*
+         * Das Spiel enthält alles an Logik, die es braucht, z. B. das Drehen von
+         * Spielsteinen oder die Berechnung von Punkten. Das Spiel kann nichts
+         * darstellen, das ist Aufgabe des Spielfelds. Das Spiel kann nur dem Spielfeld
+         * Informationen geben, die das Spielfeld dann darstellt.
+         */
+        Spiel spiel = new Spiel(tetrominoFactory, spielfeld, spielfenster);
 
-	/*
-	 * Die Vorschau beobachtet das Spielfeld, damit sie den jeweils naechsten
-	 * Spielstein sehen und darstellen kann.
-	 */
-	spiel.addObserver(vorschau);
+        /*
+         * Die Vorschau beobachtet das Spielfeld, damit sie den jeweils naechsten
+         * Spielstein sehen und darstellen kann.
+         */
+        spiel.addObserver(vorschau);
 
-	/*
-	 * =========================================================================
-	 * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
-	 * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
-	 * Spiel weiter. Ohne den KeyListener läuft das Spiel, ohne das der Spieler
-	 * etwas machen kann.
-	 * =========================================================================
-	 */
-	KeyListener tetrisKeyListener = new TetrisKeyListener(spiel);
+        /*
+         * =========================================================================
+         * Dieser Listener wird fuer die Steuerung des Spiels benoetigt (links, rechts,
+         * runter, drehen, Pause). Er erkennt Tastatureingaben und reicht diese an das
+         * Spiel weiter. Ohne den KeyListener läuft das Spiel, ohne das der Spieler
+         * etwas machen kann.
+         * =========================================================================
+         */
+        KeyListener tetrisKeyListener = new TetrisKeyListener(spiel);
 
         /*
          * Der KeyListener muss an einer Komponente haengen, die angezeigt wird, in
@@ -70,6 +70,6 @@ public class Main {
         spielfeld.addKeyListener(tetrisKeyListener);
         spielfeld.requestFocusInWindow();
 
-	spiel.starteSpiel();
+        spiel.starteSpiel();
     }
 }

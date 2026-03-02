@@ -2,19 +2,17 @@ package com.hoffrogge.tetris.view;
 
 import com.hoffrogge.tetris.logik.Spiel;
 import com.hoffrogge.tetris.model.TetrisKonstanten;
-import com.hoffrogge.tetris.model.tetromino.TetrominoFactory;
 import com.hoffrogge.tetris.model.tetromino.TetrominoSpielstein;
 
 import java.awt.*;
 import java.text.MessageFormat;
 
-@SuppressWarnings("serial")
 public class Spielfeld extends Canvas {
 
     private Spiel spiel;
 
     /* Konstruktor */
-    public Spielfeld(TetrominoFactory tetrominoFactory) {
+    public Spielfeld() {
 
         setBackground(TetrisKonstanten.HINTERGRUND);
         setForeground(TetrisKonstanten.VORDERGRUND);
@@ -119,8 +117,8 @@ public class Spielfeld extends Canvas {
 
         int stringWidth = getFontMetrics(getFont()).stringWidth(koordinatenUntenRechts);
         int offset = 10;
-        g.drawString(koordinatenObenLinks, TetrisKonstanten.SPIELFELD_X0+offset, TetrisKonstanten.SPIELFELD_Y0+offset);
-        g.drawString(koordinatenUntenRechts, TetrisKonstanten.SPIELFELD_BREITE-stringWidth-offset, TetrisKonstanten.SPIELFELD_HOEHE-offset);
+        g.drawString(koordinatenObenLinks, TetrisKonstanten.SPIELFELD_X0 + offset, TetrisKonstanten.SPIELFELD_Y0 + offset);
+        g.drawString(koordinatenUntenRechts, TetrisKonstanten.SPIELFELD_BREITE - stringWidth - offset, TetrisKonstanten.SPIELFELD_HOEHE - offset);
 
         g.setColor(backupColor);
     }
