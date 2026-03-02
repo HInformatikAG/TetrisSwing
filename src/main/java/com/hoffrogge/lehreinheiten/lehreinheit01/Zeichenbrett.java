@@ -15,7 +15,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 
 /*
- * Zeichenfläche mit einer Größe von 800 x 800 Pixeln
+ * Zeichenfläche mit einer Größe von 800 x 600 Pixeln
  *  0,0 ----------------------------------------- 600,0
  *  |                                               |
  *  |                                               |
@@ -38,7 +38,7 @@ import java.text.MessageFormat;
  */
 
 /**
- * Zeichenfläche mit einer Größe von 800 x 800 Pixeln. <br />
+ * Zeichenfläche mit einer Größe von 600 x 600 Pixeln. <br />
  * Zeichnen einer Linie ist möglich mit
  * {@link Zeichenbrett#zeichneLinie(int, int, int, int)}<br />
  */
