@@ -70,7 +70,12 @@ public class Spielfeld extends Canvas {
 
         fallenderSpielstein.zeichnen(g);
 
-        if (TetrisKonstanten.KOORDINATEN_AUS)
+        zeichneKoordinatenFuerFallendenSpielstein(g, fallenderSpielstein);
+    }
+
+    private static void zeichneKoordinatenFuerFallendenSpielstein(Graphics g, TetrominoSpielstein fallenderSpielstein) {
+
+        if (TetrisKonstanten.KOORDINATEN_FUER_FALLENDEN_SPIELSTEIN_AUS)
             return;
 
         int kanteLinksX = fallenderSpielstein.getKanteLinksX();
@@ -106,7 +111,7 @@ public class Spielfeld extends Canvas {
         g.setColor(TetrisKonstanten.RAHMEN);
         g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
-        zeichenHilfslinien(g);
+        zeichneHilfslinien(g);
         zeichneKoordinaten(g);
     }
 
@@ -129,9 +134,9 @@ public class Spielfeld extends Canvas {
         g.setColor(backupColor);
     }
 
-    private static void zeichenHilfslinien(Graphics g) {
+    private static void zeichneHilfslinien(Graphics g) {
 
-        if (TetrisKonstanten.KOORDINATEN_AUS)
+        if (TetrisKonstanten.HILFSLINIEN_AUS)
             return;
 
         Color backupColor = g.getColor();

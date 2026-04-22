@@ -9,6 +9,8 @@ public final class TetrisKonstanten {
 
     public static final boolean MUSIK_AN = false;
     public static final boolean KOORDINATEN_AUS = false;
+    public static final boolean KOORDINATEN_FUER_FALLENDEN_SPIELSTEIN_AUS = true;
+    public static final boolean HILFSLINIEN_AUS = false;
 
     public static final int BLOCK_BREITE = 32;
 
